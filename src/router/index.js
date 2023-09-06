@@ -1,19 +1,59 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
+import FrontEnd from '../views/FrontEnd.vue';
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView,
+    redirect: '/userLogin',
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    path: '/frontEnd',
+    name: 'FrontEnd',
+    component: FrontEnd,
+    children: [
+      {
+        path: 'patientRecordSearchPage',
+        name: 'PatientRecordSearchPage',
+        component: () => import('../views/client/PatientRecordSearchPage.vue'),
+      },
+      {
+        path: 'nutritionalCarePage',
+        name: 'NutritionalCarePage',
+        component: () => import('../views/client/NutritionalCarePage.vue'),
+        children: [ // 添加子路由配置
+          {
+            path: 'assessmentDiagnosis', // 子路由1
+            name: 'AssessmentDiagnosis',
+            component: () => import('../views/client/nutritionalCarePage/AssessmentDiagnosis.vue'),
+          },
+          {
+            path: 'interventionAssistance', // 子路由2
+            name: 'InterventionAssistance',
+            component: () => import('../views/client/nutritionalCarePage/InterventionAssistance.vue'),
+          },
+          {
+            path: 'surveillanceEvaluation', // 子路由3
+            name: 'SurveillanceEvaluation',
+            component: () => import('../views/client/nutritionalCarePage/SurveillanceEvaluation.vue'),
+          },
+        ],
+      },
+      {
+        path: 'healthEducationPage',
+        name: 'HealthEducationPage',
+        component: () => import('../views/client/HealthEducationPage.vue'),
+      },
+      {
+        path: 'inpatientMealPage',
+        name: 'InpatientMealPage',
+        component: () => import('../views/client/InpatientMealPage.vue'),
+      },
+    ],
+  },
+  {
+    path: '/userLogin',
+    name: 'login',
+    component: () => import('../views/UserLogin.vue'),
   },
 ];
 
