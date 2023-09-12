@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkvue3_pwa"]=self["webpackChunkvue3_pwa"]||[]).push([[66],{8066:function(n,e,u){u.r(e),u.d(e,{default:function(){return l}});var a=u(3396);const r={class:"container-page"},t=(0,a._)("h3",null,"page",-1),c=[t];function s(n,e,u,t,s,i){return(0,a.wg)(),(0,a.iD)("div",r,c)}var i={},p=u(89);const f=(0,p.Z)(i,[["render",s]]);var l=f}}]);
-//# sourceMappingURL=66.6d911fac.js.map
