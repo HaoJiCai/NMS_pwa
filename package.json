@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -16,6 +17,7 @@
     "sweetalert2": "^11.7.3",
     "vue": "^3.2.13",
     "vue-axios": "^3.4.1",
+    "vue-loading-overlay": "6.0",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0",
     "workbox-core": "^7.0.0",

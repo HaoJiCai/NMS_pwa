@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import Loading from 'vue-loading-overlay';
 import bootstrapIcons from 'bootstrap-icons/font/bootstrap-icons.scss';
 import './registerServiceWorker';
 import App from './App.vue';
@@ -13,4 +14,5 @@ APP.use(VueAxios, axios);
 APP.use(bootstrapIcons);
 APP.use(store);
 APP.use(router);
+APP.use(Loading);
 APP.mount('#app');

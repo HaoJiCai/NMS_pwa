@@ -44,6 +44,7 @@ export default {
   justify-content: space-between;
   margin-top: 60px;
   @media screen and (max-width: 768px) {
+    align-items: center;
     flex-direction: column;
   }
   .nutrition-sidebar {

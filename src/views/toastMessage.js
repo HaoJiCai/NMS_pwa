@@ -74,6 +74,20 @@ export function deleteMsg() {
     title: `${messages.deleteText}`,
   });
 }
+// 使用後端給予的 message（成功）
+export function customizeSuccessMsg(msg) {
+  Toast.fire({
+    icon: 'success',
+    title: msg,
+  });
+}
+// 使用後端給予的 message（失敗）
+export function customizeErrorMsg(msg) {
+  Toast.fire({
+    icon: 'error',
+    title: msg,
+  });
+}
 
 // 建立 Toast2 訊息物件
 const Toast2 = Swal.mixin({

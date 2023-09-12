@@ -39,9 +39,11 @@ export default {
         .then((res) => {
           console.log(res.data);
           if (res.data.success) {
-            const { token, expired, name } = res.data;
+            const { token, expired, id, name } = res.data;
             // 呼叫 mutation 來更新 state
-            this.$store.commit('SET_USERNAME', name);
+            this.$store.commit('SET_USERID', id);
+            // this.$store.commit('SET_USERNAME', name);
+            this.$store.dispatch('login', name);
             document.cookie = `hasToken=${token}; expires=${new Date(expired)};`;
             return loginMsg(); // 回傳 loginMsg() 的 Promise
           }

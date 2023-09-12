@@ -47,7 +47,6 @@ export default {
   data() {
     return {
       fixApi: 'https://140.123.173.4',
-      api: '',
       searchKeyWords: '',
       patients: [],
       // filtered_UserInfo: [],

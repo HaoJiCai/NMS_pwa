@@ -23,7 +23,7 @@ module.exports = defineConfig({
   chainWebpack: config => {
     config.resolve.extensions
       .add('.js')
-      .end()
+      .end(); // .end() 表示结束
   },
   devServer: {
     server: 'https',

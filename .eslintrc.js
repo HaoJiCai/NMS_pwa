@@ -16,6 +16,8 @@ module.exports = {
     'implicit-arrow-linebreak': 'off',
     'function-paren-newline': 'off',
     "no-restricted-globals": "off",
+    "object-curly-newline": "off",
     'max-len': ['error', { code: 200 }],
+    "linebreak-style": ["off", "windows"],
   },
 };

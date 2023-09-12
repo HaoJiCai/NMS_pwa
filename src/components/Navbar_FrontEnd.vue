@@ -3,7 +3,7 @@
     <div class="container-fluid bar" :class="{barMargin: isbarMargin}">
       <div class="collapse navbar-collapse pageBar" id="navbarNav">
         <div class="logo">
-          <h1><a href="/frontEnd#/frontEnd">NMS</a></h1>
+          <h1><a href="/NMS_pwa/#/frontEnd">NMS</a></h1>
           <h2 class="logo_name">營養管理系統</h2>
         </div>
         <div class="logoType">
@@ -15,7 +15,7 @@
           </a>
         </div>
         <div class="logo_mobile">
-          <h1><a href="/frontEnd#/frontEnd">NMS</a></h1>
+          <h1><a href="/NMS_pwa/#/frontEnd">NMS</a></h1>
           <h2 class="logo_name">營養管理系統</h2>
         </div>
         <div class="funcBtn">
@@ -79,7 +79,8 @@ export default {
   methods: {
     logout() {
       // 清除使用者資訊並導向登入頁面
-      this.$store.commit('CLEAR_USERNAME');
+      // this.$store.commit('CLEAR_USERNAME');
+      this.$store.dispatch('logout'); // 使用 actions 呼叫 mutation
       this.$router.push('/userLogin');
     },
     toggleBar_mobile() {
@@ -92,7 +93,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['getUsername']), // 映射 Vuex getter
+    ...mapGetters(['getUserID', 'getUsername']), // 映射 Vuex getter
     isLoggedIn() {
       // 從 Vuex 的 state 中獲取登入狀態
       return !!this.$store.state.username;
@@ -100,10 +101,6 @@ export default {
     username() {
       // 使用映射的 getter 從 Vuex 的 state 中獲取使用者姓名
       return this.getUsername;
-    },
-    loginOrProfileLink() {
-      // 根據是否登入返回不同的連結
-      return this.isLoggedIn ? '/frontEnd' : '/userLogin';
     },
   },
   mounted() {
