@@ -1,9 +1,16 @@
+<!--eslint-disable -->
 <template>
   <div class="container-page row">
-    <div class="row d-flex align-items-center">
-      <h3 class="col text-start">營養評估診斷</h3>
-      <div class="col text-end">
-        <button class="btn btn-dark" @click="openModal('')">建立</button>
+    <div class="table-menu">
+      <h3 class="tableName">營養評估診斷</h3>
+      <div class="btnList">
+        <div class="input-group searchList">
+          <input type="text" id="search" class="form-control" v-model="searchKeyWords" placeholder="請輸入姓名">
+          <button class="btn btn-outline-success searchBtn" @click="getSearch">查詢</button>
+        </div>
+        <div class="addModal">
+          <button class="btn btn-secondary" @click="openModal('')">建立</button>
+        </div>
       </div>
     </div>
     <div class="table-responsive">
@@ -53,11 +60,13 @@ import { mapGetters } from 'vuex';
 import PesModal from '../../../components/PesModal.vue';
 import PesEditModal from '../../../components/PesEditModal.vue';
 import PesDelModal from '../../../components/PesDelModal.vue';
+import { searchNoKeyword, searchDataNum } from '../../toastMessage';
 
 export default {
   data() {
     return {
       fixApi: 'https://140.123.173.4',
+      searchKeyWords: '',
       PES_arr: [], // 所有資料陣列
       PES_InfoDetails: {}, // 詳細資料
       pesModal: {},
@@ -66,10 +75,26 @@ export default {
     };
   },
   methods: {
+    getSearch() {
+      const api = `${this.fixApi}/nutritionist/nutritionalAssessmentDiagnosis/${this.nutritionist_id}`;
+      const keyword = this.searchKeyWords.trim();
+      this.$http.get(api, { params: { keyword } }).then((res) => {
+        this.PES_arr = res.data[0].result;
+        if (keyword === '') {
+          searchNoKeyword();
+        } else {
+          searchDataNum(res.data[0].total);
+        }
+        this.searchKeyWords = '';
+      }).catch((err) => {
+        console.log(err);
+      });
+    },
     getAssessmentDiagnosis() {
       const api = `${this.fixApi}/nutritionist/nutritionalAssessmentDiagnosis/${this.nutritionist_id}`;
       this.$http.get(api).then((res) => {
-        this.PES_arr = res.data;
+        this.PES_arr = res.data[0].result;
+        this.searchKeyWords = '';
       }).catch((err) => {
         console.log(err);
       });
@@ -169,6 +194,46 @@ export default {
     @media screen and (max-width: 768px) {
       width: 100%;
       margin-top: 50px;
+    }
+    .table-menu {
+      display: flex;
+      align-items: center;
+      @media screen and (max-width: 1024px) {
+        flex-direction: column;
+      }
+      .tableName {
+        width: 30%;
+        text-align: start;
+        @media screen and (max-width: 1024px) {
+          width: 100%;
+          text-align: center;
+          margin-bottom: 30px;
+        }
+        @media screen and (max-width: 768px) {
+          margin-bottom: 20px;
+        }
+      }
+      .btnList {
+        width: 70%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @media screen and (max-width: 1024px) {
+          width: 100%;
+        }
+        .searchList {
+          width: 85%;
+          @media screen and (max-width: 1024px) {
+            width: 70%;
+          }
+          @media screen and (max-width: 768px) {
+            width: 80%;
+          }
+        }
+        .addModal {
+          text-align: end;
+        }
+      }
     }
   }
 </style>

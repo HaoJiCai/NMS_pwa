@@ -9,12 +9,15 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@vee-validate/i18n": "^4.11.6",
+    "@vee-validate/rules": "^4.11.6",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
     "core-js": "^3.8.3",
     "register-service-worker": "^1.7.2",
     "sweetalert2": "^11.7.3",
+    "vee-validate": "^4.11.6",
     "vue": "^3.2.13",
     "vue-axios": "^3.4.1",
     "vue-loading-overlay": "6.0",
