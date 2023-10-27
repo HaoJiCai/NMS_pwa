@@ -29,11 +29,11 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/frontEnd/healthEducationPage" class="nav-link" @click.prevent="toggleBar_close">衛教專欄
+              <router-link to="/frontEnd/healthEducationPage/1" class="nav-link" @click.prevent="toggleBar_close">衛教專欄
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/frontEnd/inpatientMealPage" class="nav-link" @click.prevent="toggleBar_close">住院膳食
+              <router-link to="/frontEnd/inpatientMealPage" class="nav-link" @click.prevent="toggleBar_close">食譜管理
               </router-link>
             </li>
           </ul>
@@ -222,6 +222,11 @@ export default {
               .nav-link {
                 color: white;
                 font-size: 20px;
+                &.router-link-exact-active {
+                  font-size: 22px;
+                  font-weight: bold;
+                  color: #75e6b3;
+                }
               }
             }
             @media screen and (max-width: 1024px) {
@@ -254,7 +259,7 @@ export default {
           }
           .active{
             @media screen and (max-width: 1024px) {
-              max-height: 260px;
+              max-height: 100vh;
               z-index: 10;
             }
           }

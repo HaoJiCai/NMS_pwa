@@ -205,6 +205,8 @@ export default {
 <style lang="scss">
   .container-page {
     width: 86%;
+    display: flex;
+    flex-direction: column;
     @media screen and (max-width: 1024px) {
       width: 70%;
     }

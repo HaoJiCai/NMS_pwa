@@ -83,8 +83,13 @@ export default {
           padding: 16px 0;
           &:hover {
             color: whitesmoke; /* 鼠標懸停時的文字顏色 */
-            background-color: #2c3e50; /* 鼠標懸停時的背景色 */
+            background-color: #e98b86; /* 鼠標懸停時的背景色 */
             transition: all 0.25s ease;
+          }
+          &.router-link-exact-active {
+            font-size: 18px;
+            color: whitesmoke;
+            background-color: #e98b86;
           }
         }
       }

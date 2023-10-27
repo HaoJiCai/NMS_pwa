@@ -6,10 +6,10 @@
       <div class="btnList">
         <div class="input-group searchList">
           <input type="text" id="search" class="form-control" v-model="searchKeyWords" placeholder="請輸入姓名">
-          <button class="btn btn-outline-success searchBtn" @click="getSearch">查詢</button>
+          <button class="btn btn-outline-success searchBtn" @click="getSearch"><i class="bi bi-search"></i></button>
         </div>
         <div class="addModal">
-          <button class="btn btn-secondary" @click="openModal('')">建立</button>
+          <button class="btn btn-secondary" @click="openModal('')"><i class="bi bi-pencil-square"></i> 建立</button>
         </div>
       </div>
     </div>
@@ -32,8 +32,8 @@
             <td>{{ formatDate(pes.update_time) }}</td>
             <td>
               <div class="btn-group">
-                <button type="button" class="btn btn-outline-primary btn-sm" @click="openModal('editModal', pes)">編輯</button>
-                <button type="button" class="btn btn-outline-danger btn-sm" @click="openModal('delModal', pes)">刪除</button>
+                <button type="button" class="btn btn-outline-primary btn-sm" @click="openModal('editModal', pes)"><i class="bi bi-pencil-fill"></i></button>
+                <button type="button" class="btn btn-outline-danger btn-sm" @click="openModal('delModal', pes)"><i class="bi bi-trash3-fill"></i></button>
               </div>
             </td>
           </tr>

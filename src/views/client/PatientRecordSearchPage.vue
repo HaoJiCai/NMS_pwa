@@ -3,7 +3,7 @@
     <label for="search">
       <div class="input-group mb-3">
         <input type="text" id="search" class="form-control" v-model="searchKeyWords" placeholder="輸入關鍵字">
-        <button class="btn btn-outline-success searchBtn" @click="searchKeyword">查詢</button>
+        <button class="btn btn-outline-success searchBtn" @click="searchKeyword"><i class="bi bi-search"></i></button>
       </div>
     </label>
     <div class="table-responsive">
@@ -26,7 +26,7 @@
             <td>{{ patient.email }}</td>
             <td>{{ patient.phone}}</td>
             <td>
-              <button class="btn btn-outline-secondary" @click="showDetails(patient.patient_id)">詳細</button>
+              <button class="btn btn-outline-secondary" @click="showDetails(patient.patient_id)"><i class="bi bi-eye-fill"></i></button>
             </td>
           </tr>
         </tbody>

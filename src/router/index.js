@@ -39,14 +39,30 @@ const routes = [
         ],
       },
       {
-        path: 'healthEducationPage',
+        path: 'healthEducationPage/:eduType',
         name: 'HealthEducationPage',
         component: () => import('../views/client/HealthEducationPage.vue'),
+        props: true, // 啟用 props 傳遞路由参数
+        default: '1', // 設定預設值為 1
+        children: [
+          {
+            path: ':eduId',
+            props: true,
+            component: () => import('../components/HealthEducationDetail.vue'),
+          },
+        ],
       },
       {
         path: 'inpatientMealPage',
         name: 'InpatientMealPage',
         component: () => import('../views/client/InpatientMealPage.vue'),
+        children: [
+          {
+            path: ':category_id',
+            props: true,
+            component: () => import('../components/RecipeDetail.vue'),
+          },
+        ],
       },
     ],
   },
