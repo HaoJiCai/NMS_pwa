@@ -5,19 +5,21 @@ module.exports = defineConfig({
   transpileDependencies: true,
   pwa: {
     name: 'NMS',
-    themeColor: '#6476DB',
-    msTileColor: '#000000',
+    themeColor: '#EAC100',
+    msTileColor: '#F5F5F5',
     appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: 'black',
+    appleMobileWebAppStatusBarStyle: 'white',
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       swSrc: './src/service-worker.js', // 使用 swSrc 設定相對於 src 的路徑
       swDest: 'service-worker.js', // 生成的 Service Worker 文件名稱和路徑
     },  
     iconPaths: {
-      favicon32: 'public/img/icons/android-chrome-50x50.png',
-      favicon16: 'public/img/icons/android-chrome-50x50.png',
-      appleTouchIcon: 'public/img/icons/android-chrome-145x145.png',
+      favicon32: 'public/img/icons/favicon-16x16.png',
+      favicon16: 'public/img/icons/favicon-32x32.png',
+      appleTouchIcon: 'public/img/icons/apple-touch-icon.png',
+      maskIcon: 'public/img/icons/safari-pinned-tab.svg',
+      msTileImage: 'public/img/icons/mstile-144x144.png',
     }
   },
   chainWebpack: config => {
