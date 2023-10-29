@@ -1,5 +1,5 @@
 <template>
-  <div class="container-page">
+  <div class="container-page-recipe">
     <ul class="recipeDetail-list">
       <li class="recipeDetail-type" v-for="recipe in recipelist" :key="recipe.recipe_id">
         <div class="recipeDetail-title">
@@ -111,9 +111,10 @@ export default {
 };
 </script>
 <style lang="scss">
-.container-page {
+.container-page-recipe {
   width: 100%;
   .recipeDetail-list {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;

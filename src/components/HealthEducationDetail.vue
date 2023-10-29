@@ -1,6 +1,6 @@
 <!--eslint-disable -->
 <template>
-  <div class="container-page">
+  <div class="container-page-healthEducation">
     <div class="detail-title">
       <div class="title">
         <h5>標題：</h5>
@@ -58,7 +58,7 @@ export default {
 </script>
 
 <style lang="scss">
-.container-page {
+.container-page-healthEducation {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
