@@ -6,8 +6,8 @@
           <h3>{{ recipe.name }}</h3>
         </div>
         <div class="recipeDetail-btn">
-          <button class="btn btn-outline-primary" @click="openModal('editModal', recipe)"><i class="bi bi-pencil-fill"></i></button>
-          <button class="btn btn-outline-danger" @click="openModal('delModal', recipe)"><i class="bi bi-trash3-fill"></i></button>
+          <button type="button" class="btn btn-outline-primary" @click="openModal('editModal', recipe)"><i class="bi bi-pencil-fill"></i></button>
+          <button type="button" class="btn btn-outline-danger" @click="openModal('delModal', recipe)"><i class="bi bi-trash3-fill"></i></button>
         </div>
       </li>
     </ul>
@@ -127,13 +127,16 @@ export default {
       justify-content: center;
     }
     .recipeDetail-type {
-      width: 18%;
+      width: 17.5%;
       border: 1px solid black;
       border-radius: 10px;
       background-color: rgb(243, 214, 177);
       padding: 20px;
+      margin-right: 32px;
+      margin-bottom: 20px;
       @media screen and (max-width: 1024px) {
         width: 45%;
+        margin-right: 0;
         margin-bottom: 18px;
       }
       @media screen and (max-width: 768px) {
@@ -160,15 +163,6 @@ export default {
         button {
           margin-left: 6px;
         }
-      }
-    }
-    li+li {
-      margin-left: 24px;
-      @media screen and (max-width: 1024px) {
-        margin-left: 10px;
-      }
-      @media screen and (max-width: 768px) {
-        margin-left: 0px;
       }
     }
   }

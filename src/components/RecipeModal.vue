@@ -23,7 +23,7 @@
                     <option value="" selected disabled>請選擇食材</option>
                     <option :value="nutrition.nutrition_id" v-for="nutrition in nutritions" :key="nutrition.nutrition_id">{{ nutrition.name }}</option>
                   </select>
-                  <button class="btn btn-outline-danger" @click="select_Nutrition">加入</button>
+                  <button type="button" class="btn btn-outline-danger" @click="select_Nutrition">加入</button>
                 </div>
               </div>
               <div class="form-group col content-nutritions">
@@ -34,7 +34,7 @@
                       <span>{{ selectedNutrition.name }}</span>
                     </li>
                   </ul>
-                  <button type="button" class="btn btn-danger" @click="remove_Nutrition"><i class="bi bi-trash3-fill"></i> 清除</button>
+                  <button type="button" class="btn btn-danger" @click="remove_Nutrition"><i class="bi bi-trash3-fill"></i><span> 清除</span></button>
                 </div>
               </div>
               <div class="form-textarea mb-4">
@@ -95,16 +95,20 @@ export default {
     },
     select_Nutrition() {
       if (this.selectedNutritionID !== '') {
-        // 找到所選擇的物件
-        const selectedValue = this.nutritions.find((nutrition) => nutrition.nutrition_id === this.selectedNutritionID);
-
-        // 將所選的物件加入到陣列
-        if (selectedValue) {
-          this.selectedNutritions.push(selectedValue);
+        if (this.selectedNutritions.length < 4) {
+          // 找到所選擇的物件
+          const selectedValue = this.nutritions.find((nutrition) => nutrition.nutrition_id === this.selectedNutritionID);
+          // 將所選的物件加入到陣列
+          if (selectedValue) {
+            this.selectedNutritions.push(selectedValue);
+          }
+          // 重置所選物件
+          this.selectedNutritionID = '';
+        } else {
+          customizeErrorMsg('食材最多只能選擇4項');
         }
-
-        // 重置所選物件
-        this.selectedNutritionID = '';
+      } else {
+        customizeErrorMsg('未選擇食材項目');
       }
     },
     remove_Nutrition() {
@@ -245,9 +249,20 @@ export default {
             background-color: rgb(52, 42, 165);
             color: whitesmoke;
             border: 0.5px solid rgb(52, 80, 205);
-            border-radius: 10px;
+            border-radius: 20px;
             padding: 4px 6px;
             margin-left: 8px;
+          }
+        }
+        button {
+          span {
+            font-size: 18px;
+            @media screen and (max-width: 1024px) {
+              font-size: 16px;
+            }
+            @media screen and (max-width: 768px) {
+              display: none;
+            }
           }
         }
         @media screen and (max-width: 1024px) {
