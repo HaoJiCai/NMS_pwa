@@ -1,7 +1,7 @@
 <!--eslint-disable -->
 <template>
   <div id="recipeModal" ref="recipeModal" class="modal fade" tabindex="-1" aria-labelledby="recipeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-xl container-modal">
       <v-form class="modal-content border-0" v-slot="{ errors }">
         <div class="modal-header bg-dark text-white">
           <h5 id="recipeModalLabel" class="modal-title">
@@ -11,28 +11,30 @@
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-sm">
-              <div class="form-group col">
-                <label for="recipe_name">食譜名稱：</label>
-                <v-field id="recipe_name" name="食譜名稱" type="text" v-model="infoDetail.name" :rules="{ required: true, max: 10 }" :class="{'is-invalid': errors['食譜名稱']}"></v-field>
-                <error-message name="食譜名稱" class="invalid-feedback"></error-message>
-              </div>
-              <div class="form-group col">
+            <div class="col-sm body-content">
+              <div class="content-header">
+                <div class="form-group col content-recipeName">
+                  <v-field id="recipe_name" name="食譜名稱" type="text" v-model="infoDetail.name" placeholder="請輸入食譜名稱" :rules="{ required: true, max: 10 }" :class="{'is-invalid': errors['食譜名稱']}"></v-field>
+                  <error-message name="食譜名稱" class="invalid-feedback"></error-message>
+                </div>
                 <div class="nutrition-label">
-                  <label for="nutrition">請選擇食材：</label>
+                  <label for="nutrition">食材選擇：</label>
                   <select id="nutrition" v-model="selectedNutritionID">
                     <option value="" selected disabled>請選擇食材</option>
                     <option :value="nutrition.nutrition_id" v-for="nutrition in nutritions" :key="nutrition.nutrition_id">{{ nutrition.name }}</option>
                   </select>
                   <button class="btn btn-outline-danger" @click="select_Nutrition">加入</button>
                 </div>
+              </div>
+              <div class="form-group col content-nutritions">
                 <div class="nutrition-selected">
                   <label for="">已加入：</label>
                   <ul class="nutrition-list">
                     <li class="nutrition-item" v-for="selectedNutrition in selectedNutritions" :key="selectedNutrition.nutrition_id">
-                      <p>{{ selectedNutrition.name }}</p>
+                      <span>{{ selectedNutrition.name }}</span>
                     </li>
                   </ul>
+                  <button type="button" class="btn btn-danger" @click="remove_Nutrition"><i class="bi bi-trash3-fill"></i> 清除</button>
                 </div>
               </div>
               <div class="form-textarea mb-4">
@@ -105,6 +107,14 @@ export default {
         this.selectedNutritionID = '';
       }
     },
+    remove_Nutrition() {
+      if (this.selectedNutritions.length !== 0) {
+        // 將所選的所有物件移除陣列
+        this.selectedNutritions = [];
+        // 重置所選物件
+        this.selectedNutritionID = '';
+      }
+    },
     confirmPost() {
       this.$store.dispatch('startLoading');
       const api = `${this.fixApi}/recipe/${this.categoryData}`;
@@ -157,3 +167,99 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.container-modal {
+ .modal-body {
+  background-color: rgb(245, 245, 245);
+  .body-content {
+    input, select, textarea {
+      border: 0 none;
+      border-radius: 5px;
+      background-color: burlywood;
+      padding: 6px 4px;
+    }
+    .content-header {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      @media screen and (max-width: 1024px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+      @media screen and (max-width: 768px) {
+        margin-bottom: 10px;
+      }
+      .content-recipeName {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        @media screen and (max-width: 1024px) {
+          width: 100%;
+          margin-bottom: 8px;
+        }
+      }
+      .nutrition-label {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button {
+          margin-left: 8px;
+        }
+        @media screen and (max-width: 1024px) {
+          width: 100%;
+          margin-bottom: 8px;
+          label {
+            display: none;
+          }
+        }
+      }
+    }
+    .content-nutritions {
+      margin-bottom: 20px;
+      @media screen and (max-width: 1024px) {
+        margin-bottom: 16px;
+      }
+      @media screen and (max-width: 768px) {
+        margin-bottom: 10px;
+      }
+      .nutrition-selected {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: burlywood;
+        border-radius: 5px;
+        padding: 6px 4px;
+        ul {
+          display: flex;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          li {
+            background-color: rgb(52, 42, 165);
+            color: whitesmoke;
+            border: 0.5px solid rgb(52, 80, 205);
+            border-radius: 10px;
+            padding: 4px 6px;
+            margin-left: 8px;
+          }
+        }
+        @media screen and (max-width: 1024px) {
+          width: 100%;
+          margin-bottom: 8px;
+          label {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+ }
+}
+</style>

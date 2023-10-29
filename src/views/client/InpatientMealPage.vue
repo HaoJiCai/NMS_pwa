@@ -34,6 +34,7 @@ export default {};
 .container {
   padding: 0;
   .recipe {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;

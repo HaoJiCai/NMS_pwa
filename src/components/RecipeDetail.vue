@@ -12,7 +12,7 @@
       </li>
     </ul>
     <div class="addBtn">
-      <button class="" @click="openModal('')"><i class="bi bi-plus-lg"></i></button>
+      <button type="button" @click="openModal('')"><i class="bi bi-plus-lg"></i></button>
     </div>
   </div>
   <!----- 畫面 Loading ----->
@@ -134,20 +134,32 @@ export default {
       padding: 20px;
       @media screen and (max-width: 1024px) {
         width: 45%;
+        margin-bottom: 18px;
       }
       @media screen and (max-width: 768px) {
         width: 100%;
+        margin-bottom: 15px;
       }
       .recipeDetail-title {
+        margin-bottom: 16px;
         h3 {
           font-weight: bold;
-          font-size: 36px;
+          font-size: 32px;
+          @media screen and (max-width: 1024px) {
+            font-size: 30px;
+          }
+          @media screen and (max-width: 768px) {
+            font-size: 28px;
+          }
         }
       }
       .recipeDetail-btn {
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        button {
+          margin-left: 6px;
+        }
       }
     }
     li+li {
@@ -157,7 +169,6 @@ export default {
       }
       @media screen and (max-width: 768px) {
         margin-left: 0px;
-        margin-bottom: 12px;
       }
     }
   }
@@ -175,6 +186,16 @@ export default {
       border: 1px solid #44aeae;
       border-radius: 50%;
       box-shadow: 3px 5px 5px 1px rgba(0,0,0,0.5);
+      @media screen and (max-width: 1024px) {
+        width: 80px;
+        height: 80px;
+        font-size: 28px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 60px;
+        height: 60px;
+        font-size: 22px;
+      }
     }
   }
 }
