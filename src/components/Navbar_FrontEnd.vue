@@ -3,7 +3,7 @@
     <div class="container-fluid bar" :class="{barMargin: isbarMargin}">
       <div class="collapse navbar-collapse pageBar" id="navbarNav">
         <div class="logo">
-          <h1><a href="/NMS_pwa/#/frontEnd">NMS</a></h1>
+          <h1><a href="/NMS_pwa/#/frontEnd/homePage">NMS</a></h1>
           <h2 class="logo_name">營養管理系統</h2>
         </div>
         <div class="logoType">
@@ -15,7 +15,7 @@
           </a>
         </div>
         <div class="logo_mobile">
-          <h1><a href="/NMS_pwa/#/frontEnd">NMS</a></h1>
+          <h1><a href="/NMS_pwa/#/frontEnd/homePage">NMS</a></h1>
           <h2 class="logo_name">營養管理系統</h2>
         </div>
         <div class="funcBtn">

@@ -50,7 +50,7 @@ export default {
           return loginErrorMsg(); // 設定預設回傳值
         })
         .then(() => {
-          this.$router.push('/frontEnd'); // 在 loginMsg() 完成後執行
+          this.$router.push('/frontEnd/homePage'); // 在 loginMsg() 完成後執行
         })
         .catch((err) => {
           console.log(err);

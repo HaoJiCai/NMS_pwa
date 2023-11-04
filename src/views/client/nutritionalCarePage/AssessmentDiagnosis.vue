@@ -9,7 +9,7 @@
           <button class="btn btn-outline-success searchBtn" @click="getSearch"><i class="bi bi-search"></i></button>
         </div>
         <div class="addModal">
-          <button class="btn btn-secondary" @click="openModal('')"><i class="bi bi-pencil-square"></i> 建立</button>
+          <button class="btn btn-secondary" @click="openModal('')"><i class="bi bi-pencil-square"></i><span> 建立</span></button>
         </div>
       </div>
     </div>
@@ -232,6 +232,13 @@ export default {
         }
         .addModal {
           text-align: end;
+          button {
+            span {
+              @media screen and (max-width: 768px) {
+                display: none;
+              }
+            }
+          }
         }
       }
     }

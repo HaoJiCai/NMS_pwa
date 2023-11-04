@@ -12,6 +12,11 @@ const routes = [
     component: FrontEnd,
     children: [
       {
+        path: 'homePage',
+        name: 'HomePage',
+        component: () => import('../views/client/HomePage.vue'),
+      },
+      {
         path: 'patientRecordSearchPage',
         name: 'PatientRecordSearchPage',
         component: () => import('../views/client/PatientRecordSearchPage.vue'),

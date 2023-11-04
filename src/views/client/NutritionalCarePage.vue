@@ -14,7 +14,7 @@
           </router-link>
         </li>
         <li class="menu-item">
-          <router-link to="/frontEnd/nutritionalCarePage/surveillanceEvaluation" class="menu-link txt-sm">衛教監測評值
+          <router-link to="/frontEnd/nutritionalCarePage/surveillanceEvaluation" class="menu-link txt-sm">營養監測評值
           </router-link>
         </li>
       </ul>

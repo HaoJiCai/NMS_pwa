@@ -122,17 +122,24 @@ export default {
     confirmPost() {
       this.$store.dispatch('startLoading');
       const api = `${this.fixApi}/recipe/${this.categoryData}`;
-      this.$http.post(api, this.infoDetailCopy).then((res) => {
-        this.$emit('addRecipe');
-        console.log(res.data);
+      if (this.infoDetailCopy.name === '' || this.infoDetailCopy.nutrition.length === 0 || this.infoDetailCopy.step === '') {
+        customizeErrorMsg('尚有輸入欄位未填寫');
         setTimeout(() => {
           this.$store.dispatch('stopLoading');
         }, 350);
-        customizeSuccessMsg(res.data.msg);
-      }).catch((err) => {
-        console.log(err);
-        customizeErrorMsg(err.response.data.msg);
-      });
+      } else {
+        this.$http.post(api, this.infoDetailCopy).then((res) => {
+          this.$emit('addRecipe');
+          console.log(res.data);
+          setTimeout(() => {
+            this.$store.dispatch('stopLoading');
+          }, 350);
+          customizeSuccessMsg(res.data.msg);
+        }).catch((err) => {
+          console.log(err);
+          customizeErrorMsg(err.response.data.msg);
+        });
+      }
     },
     closeClearData() {
       this.selectedNutritionID = '';

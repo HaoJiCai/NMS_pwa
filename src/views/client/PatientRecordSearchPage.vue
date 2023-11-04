@@ -40,7 +40,7 @@
 /* eslint object-curly-newline: "off" */
 import * as bootstrap from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-import { checkSuccessMsg, checkErrorMsg, searchNoKeyword, searchDataNum } from '../toastMessage';
+import { searchNoKeyword, searchDataNum } from '../toastMessage';
 import PatientInfoDetailsModal from '../../components/PatientInfoDetailsModal.vue';
 
 export default {
@@ -49,7 +49,6 @@ export default {
       fixApi: 'https://140.123.173.4',
       searchKeyWords: '',
       patients: [],
-      // filtered_UserInfo: [],
       patientInfoDetails_modal: {},
       healthConditions: {
         modalTitle: '',
@@ -58,10 +57,6 @@ export default {
     };
   },
   computed: {
-    // 回傳 filterUserInfo 方法，所篩選出的資料
-    // filteredUserInfo() {
-    //   return this.filtered_UserInfo;
-    // },
     genderText() {
       return {
         0: '女',
@@ -70,30 +65,6 @@ export default {
     },
   },
   methods: {
-    // filterUserInfo() {
-    //   if (!this.searchKeyWords) {
-    //     this.filtered_UserInfo = this.userInfo;
-    //   } else {
-    //     this.filtered_UserInfo = this.userInfo.filter((user) => Object.values(user).some((val) => String(val).toLowerCase().includes(this.searchKeyWords.toLowerCase())));
-    //   }
-    // },
-    // 檢查登入驗證
-    checkedLoginStatus() {
-      // eslint-disable-next-line
-      const token = document.cookie.replace(/(?:(?:^|.*;\s*)hasToken\s*\=\s*([^;]*).*$)|^.*$/, '$1'); // 取得名為 hasToken 的 cookie
-      this.$http.defaults.headers.common.Authorization = token; // 把 Token 加入到 Headers Authorization 裡
-      // console.log(token);
-      const api = `${this.fixApi}/nutritionist/loginCheck`;
-      // 串接 /user/check API
-      this.$http.get(api).then((status) => {
-        // console.log(status);
-        if (status.data.success) {
-          checkSuccessMsg();
-        }
-      }).catch(() => {
-        checkErrorMsg();
-      });
-    },
     searchKeyword() {
       const api = `${this.fixApi}/patient/`;
       const keyword = this.searchKeyWords.trim();
@@ -161,8 +132,6 @@ export default {
     this.search();
   },
   mounted() {
-    this.checkedLoginStatus();
-
     const modal = new bootstrap.Modal(document.getElementById('patientInfoDetailsModal'));
     this.patientInfoDetails_modal = modal;
   },

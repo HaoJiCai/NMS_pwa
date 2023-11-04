@@ -83,14 +83,28 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   .educationType {
     width: 20%;
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+    }
     .type-bar {
       text-align: center;
       font-weight: bold;
       list-style: none;
       margin: 0;
       padding: 0;
+      @media screen and (max-width: 1024px) {
+        margin-bottom: 20px;
+      }
+      @media screen and (max-width: 768px) {
+        margin-bottom: 10px;
+      }
       .type-item {
         border: 0.25px solid rgb(233, 233, 233);
         .type-link {
@@ -115,6 +129,9 @@ export default {
   }
   .educationContent {
     width: 70%;
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+    }
     .content-bar {
       text-align: center;
       font-weight: 500;
@@ -139,6 +156,18 @@ export default {
             font-size: 20px;
             margin-right: 0px;
             padding: 0 16px;
+            @media screen and (max-width: 1024px) {
+              font-size: 18px;
+            }
+            @media screen and (max-width: 768px) {
+              font-size: 16px;
+            }
+          }
+          @media screen and (max-width: 1024px) {
+            font-size: 18px;
+          }
+          @media screen and (max-width: 768px) {
+            font-size: 16px;
           }
         }
       }
@@ -146,6 +175,9 @@ export default {
   }
   .educationDetail {
     width: 70%;
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+    }
   }
 }
 </style>
