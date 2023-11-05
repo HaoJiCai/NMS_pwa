@@ -215,6 +215,7 @@ export default {
       margin-top: 50px;
     }
     .title {
+      width: 100%;
       padding: 5px;
       margin-bottom: 16px;
       background-color: rgb(235, 157, 89);
@@ -224,6 +225,7 @@ export default {
       }
     }
     .trialCalculation {
+      width: 100%;
       display: flex;
       justify-content: space-around;
       @media screen and (max-width: 1024px) {
@@ -296,6 +298,7 @@ export default {
       }
     }
     .nutritionCalculation {
+      width: 100%;
       display: flex;
       justify-content: space-around;
       margin-bottom: 30px;
