@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     searchKeyword() {
-      const api = `${this.fixApi}/patient/`;
+      const api = `${this.fixApi}/patient`;
       const keyword = this.searchKeyWords.trim();
 
       this.$http.get(api, { params: { keyword } }).then((res) => {
@@ -84,10 +84,10 @@ export default {
       });
     },
     search() {
-      const api = `${this.fixApi}/patient/`;
+      const api = `${this.fixApi}/patient`;
 
       this.$http.get(api).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.patients = res.data[0].result;
         this.searchKeyWords = '';
       }).catch((err) => {
@@ -98,23 +98,9 @@ export default {
       const api = `${this.fixApi}/patient/healthConditions/${patientID}`;
       this.$http.get(api).then((res) => {
         this.healthConditions = res.data;
-
-        // 設定彈跳視窗內容
-        this.healthConditions.modalTitle = `${this.healthConditions.name} 詳細資料`;
-        this.healthConditions.modalContent = `飲食醫囑：${this.healthConditions.doctorOrder}<br>`
-          + `活動狀態：${this.healthConditions.activeStatus}<br>`
-          + `運動情況：${this.healthConditions.sportsStatus}<br>`
-          + `症狀：${this.healthConditions.symptom}<br>`
-          + `疾病：${this.healthConditions.disease}<br>`
-          + `營養知識：${this.healthConditions.knowledge}<br>`
-          + `遵從度：${this.healthConditions.compliance}<br>`
-          + `身高：${this.healthConditions.height}<br>`
-          + `體重：${this.healthConditions.weight}<br>`
-          + `BMI：${this.healthConditions.bmi}<br>`
-          + `體重變化：${this.healthConditions.weight_change}<br>`
-          + `總攝（灌）食量/天：${this.healthConditions.caloriesEaten} 大卡<br>`
-          + `總需求量/天：${this.healthConditions.caloriesDemand} 大卡<br>`;
-        console.log(this.healthConditions.modalContent);
+        console.log(res.data);
+        // 設定彈跳視窗標題
+        this.healthConditions.modalTitle = `${this.healthConditions[0].name} 詳細資料`;
         // 顯示 Modal 彈跳視窗
         this.patientInfoDetails_modal.show();
       }).catch((err) => {

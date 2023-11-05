@@ -35,6 +35,7 @@ export default {
         }
       }).catch(() => {
         checkErrorMsg();
+        this.$router.push('/');
       });
     },
   },
