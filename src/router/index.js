@@ -4,7 +4,7 @@ import FrontEnd from '../views/FrontEnd.vue';
 const routes = [
   {
     path: '/',
-    redirect: '/userLogin',
+    redirect: '/frontEnd/homePage',
   },
   {
     path: '/frontEnd',
