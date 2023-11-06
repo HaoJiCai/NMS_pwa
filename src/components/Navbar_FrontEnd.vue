@@ -86,6 +86,15 @@ export default {
     goToUserlogin() {
       this.$router.push('/userLogin');
     },
+    savedLocalUsername() {
+      const savedUsername = localStorage.getItem('username');
+      if (savedUsername) {
+        // 將使用者名稱設置到 Vuex store 中
+        this.$store.commit('SET_USERNAME', savedUsername);
+      } else {
+        this.$router.push('/userLogin');
+      }
+    },
     toggleBar_mobile() {
       this.isActive = !this.isActive;
       this.isbarMargin = !this.isbarMargin;
@@ -108,6 +117,9 @@ export default {
   },
   mounted() {
     this.isbarMargin = false;
+  },
+  created() {
+    this.savedLocalUsername();
   },
 };
 </script>

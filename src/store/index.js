@@ -32,10 +32,12 @@ export default createStore({
     login({ commit }, username) {
       // 假設這裡是登入的邏輯，登入成功後呼叫 mutation 設定使用者姓名
       commit('SET_USERNAME', username);
+      localStorage.setItem('username', username);
     },
     logout({ commit }) {
       // 假設這裡是登出的邏輯，登出時呼叫 mutation 清除使用者姓名
       commit('CLEAR_USERNAME');
+      localStorage.removeItem('username');
     },
     startLoading({ commit }) {
       commit('SET_LOADING', true);
