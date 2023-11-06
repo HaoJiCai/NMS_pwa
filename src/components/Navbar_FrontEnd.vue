@@ -38,7 +38,7 @@
             </li>
           </ul>
           <ul class="navbar-nav loginBar">
-            <div class="dropdown">
+            <div class="dropdown btn-group">
               <button type="button" v-if="isLoggedIn" id="userDropdown" class="btn dropdown-toggle text-light" data-bs-toggle="dropdown" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                   <!-- 覆蓋 eslint 設置，僅能用在下一行 -->
@@ -47,14 +47,14 @@
                 </svg>
                 <span>{{ isLoggedIn ? username : '登入' }}</span>
               </button>
-              <router-link v-else to="/userLogin" class="nav-link text-light">
+              <button v-else class="nav-link text-light" @click="goToUserlogin">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                   <!-- 覆蓋 eslint 設置，僅能用在下一行 -->
                   <!-- eslint-disable-next-line max-len -->
                   <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                 </svg>
                 <span>{{ isLoggedIn ? username : '登入' }}</span>
-              </router-link>
+              </button>
               <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="userDropdown" style="min-width: 30px;">
                 <li><button @click="logout" class="dropdown-item logoutBtn" type="button">登出</button></li>
               </ul>
@@ -81,6 +81,9 @@ export default {
       // 清除使用者資訊並導向登入頁面
       // this.$store.commit('CLEAR_USERNAME');
       this.$store.dispatch('logout'); // 使用 actions 呼叫 mutation
+      this.$router.push('/userLogin');
+    },
+    goToUserlogin() {
       this.$router.push('/userLogin');
     },
     toggleBar_mobile() {
