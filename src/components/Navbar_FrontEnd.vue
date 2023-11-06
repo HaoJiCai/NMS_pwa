@@ -281,18 +281,24 @@ export default {
           .loginBar {
             font-size: 18px;
             margin-left: 220px;
-            .logoutBtn {
-              font-size: 16px;
-            }
             @media screen and (max-width: 1024px) {
               margin-left: 0;
             }
-            @media screen and (max-width: 768px) {
-              span {
-                display: none;
-              }
+            .dropdown {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
               .logoutBtn {
-                font-size: 12px;
+                font-size: 16px;
+                @media screen and (max-width: 768px) {
+                  font-size: 12px;
+                }
+              }
+              span {
+                @media screen and (max-width: 768px) {
+                  display: none;
+                }
               }
             }
           }
