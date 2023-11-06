@@ -14,12 +14,14 @@ export default createStore({
   mutations: {
     SET_USERID(state, id) {
       state.id = id;
+      localStorage.setItem('userid', id);
     },
     SET_USERNAME(state, username) {
       state.username = username;
     },
     CLEAR_USERID(state) {
       state.id = null;
+      localStorage.removeItem('userid');
     },
     CLEAR_USERNAME(state) {
       state.username = '';
@@ -35,6 +37,7 @@ export default createStore({
       localStorage.setItem('username', username);
     },
     logout({ commit }) {
+      commit('CLEAR_USERID');
       // 假設這裡是登出的邏輯，登出時呼叫 mutation 清除使用者姓名
       commit('CLEAR_USERNAME');
       localStorage.removeItem('username');

@@ -99,6 +99,13 @@ export default {
         console.log(err);
       });
     },
+    savedLocalUserID() {
+      const savedUserid = localStorage.getItem('userid');
+      if (savedUserid) {
+        // 將使用者名稱設置到 Vuex store 中
+        this.$store.commit('SET_USERID', savedUserid);
+      }
+    },
     // 日期時間格式轉換
     formatDate(dateTimeString) {
       // const date = new Date(dateTimeString);
@@ -174,6 +181,7 @@ export default {
   },
   created() {
     this.getAssessmentDiagnosis();
+    this.savedLocalUserID();
   },
   mounted() {
     this.pesModal = new bootstrap.Modal(document.getElementById('pesModal'));
