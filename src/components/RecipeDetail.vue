@@ -1,9 +1,15 @@
 <template>
   <div class="container-page-recipe">
     <ul class="recipeDetail-list">
-      <li class="recipeDetail-type" v-for="recipe in recipelist" :key="recipe.recipe_id">
+      <li class="recipeDetail-type" v-for="(recipe, index) in recipelist.list" :key="recipe.recipe_id">
         <div class="recipeDetail-title">
           <h3>{{ recipe.name }}</h3>
+        </div>
+        <div class="recipeDetail-content">
+          <p>碳水化合物： <span>{{ recipelist.nutrition_detail[index].totalCarbohydrates }}</span>（Cal）</p>
+          <p>蛋白質： <span>{{ recipelist.nutrition_detail[index].totalProtein }}</span>（Cal）</p>
+          <p>脂肪： <span>{{ recipelist.nutrition_detail[index].totalFat }}</span>（Cal）</p>
+          <p>總卡路里： <span>{{ recipelist.nutrition_detail[index].totalCalories }}</span>（Cal）</p>
         </div>
         <div class="recipeDetail-btn">
           <button type="button" class="btn btn-outline-primary" @click="openModal('editModal', recipe)"><i class="bi bi-pencil-fill"></i></button>
@@ -37,7 +43,10 @@ export default {
     return {
       fixApi: 'https://140.123.173.4',
       localCategoryID: this.category_id,
-      recipelist: [],
+      recipelist: {
+        list: [],
+        nutrition_detail: [],
+      },
       recipe_InfoDetails: {}, // 詳細資料
       recipeModal: {},
       recipeEditModal: {},
@@ -48,8 +57,32 @@ export default {
     getRecipeCategory() {
       const api = `${this.fixApi}/recipe/${this.localCategoryID}`;
       this.$http.get(api).then((res) => {
-        this.recipelist = res.data;
+        this.recipelist.list = res.data;
+        this.countCalories(this.recipelist.list);
       });
+    },
+    countCalories(listData) {
+      const recipelist = Array.from(listData);
+      if (recipelist.length !== 0) {
+        recipelist.forEach((recipe, index) => {
+          const totalObj = {
+            no: '',
+            totalCalories: 0,
+            totalProtein: 0,
+            totalCarbohydrates: 0,
+            totalFat: 0,
+          };
+          const nutrition = JSON.parse(recipe.nutrition);
+          nutrition.forEach((item) => {
+            totalObj.no = index;
+            totalObj.totalCalories += Math.round(item.calories);
+            totalObj.totalProtein += Math.round(item.protein);
+            totalObj.totalCarbohydrates += Math.round(item.carbohydrates);
+            totalObj.totalFat += Math.round(item.fat);
+          });
+          this.recipelist.nutrition_detail[index] = totalObj;
+        });
+      }
     },
     openModal(modal, data) {
       if (modal === '') {
@@ -128,7 +161,7 @@ export default {
       justify-content: center;
     }
     .recipeDetail-type {
-      width: 17.5%;
+      width: 22.5%;
       border: 1px solid black;
       border-radius: 10px;
       background-color: rgb(243, 214, 177);
@@ -154,6 +187,31 @@ export default {
           }
           @media screen and (max-width: 768px) {
             font-size: 28px;
+          }
+        }
+      }
+      .recipeDetail-content {
+        margin-bottom: 16px;
+        text-align: left;
+        p {
+          font-weight: 500;
+          font-size: 18px;
+          @media screen and (max-width: 1024px) {
+            font-size: 16px;
+          }
+          @media screen and (max-width: 768px) {
+            font-size: 18px;
+          }
+        }
+        span {
+          font-weight: 700;
+          font-size: 20px;
+          color: rgb(149, 49, 49);
+          @media screen and (max-width: 1024px) {
+            font-size: 18px;
+          }
+          @media screen and (max-width: 768px) {
+            font-size: 20px;
           }
         }
       }

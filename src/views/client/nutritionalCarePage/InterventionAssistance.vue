@@ -84,7 +84,7 @@
         </div>
       </div>
       <div class="calculateResult">
-        <p>攝取的卡路里：<span>{{ calorie }}</span>｛Cal｝</p>
+        <p>攝取的卡路里：<span>{{ calorie }}</span>（Cal）</p>
       </div>
     </div>
   </div>
