@@ -11,7 +11,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { checkSuccessMsg, checkErrorMsg } from '../toastMessage';
+import { checkErrorMsg } from '../toastMessage';
 
 export default {
   data() {
@@ -31,7 +31,7 @@ export default {
       this.$http.get(api).then((status) => {
         // console.log(status);
         if (status.data.success) {
-          checkSuccessMsg();
+          console.log('身分驗證成功');
         }
       }).catch(() => {
         checkErrorMsg();
