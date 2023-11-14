@@ -44,7 +44,6 @@ export default {
           if (permission === 'granted') {
             const notification = new Notification('通知權限已啟用', {
               body: '您現在可以接收通知了！',
-              icon: '../assets/logo_xs.png',
             });
             console.log(notification);
           }
