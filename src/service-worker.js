@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { precacheAndRoute } from 'workbox-precaching';
 import { setCacheNameDetails } from 'workbox-core';
 import { registerRoute } from 'workbox-routing';
@@ -13,8 +14,28 @@ setCacheNameDetails({
 });
 // service worker 盡快的得到更新和獲取頁面的控制權
 self.addEventListener('install', (event) => {
+  event.waitUntil(
+    // 在安裝階段請求通知權限
+    Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        // 通知權限已授予，您可以顯示通知或進行其他相應的操作
+        self.registration.showNotification('通知權限已啟用', {
+          body: '您現在可以接收通知了！',
+          icon: 'path/to/icon.png',
+        });
+      }
+    }),
+
+    // 預緩存靜態資源
+    caches.open('my-cache').then((cache) => {
+      return cache.addAll(manifest.map((item) => item.url));
+    }),
+
+    // service worker 盡快的得到更新和獲取頁面的控制權
+    self.skipWaiting(),
+  );
   // eslint-disable-next-line no-unused-vars
-  event.waitUntil(self.skipWaiting());
+  // event.waitUntil(self.skipWaiting());
 });
 self.addEventListener('activate', (event) => {
   // eslint-disable-next-line no-unused-vars
