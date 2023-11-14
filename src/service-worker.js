@@ -30,6 +30,12 @@ self.addEventListener('install', (event) => {
       return cache.addAll(cacheFiles);
     }),
 
+    // 在安裝事件中添加發送通知的邏輯
+    self.registration.showNotification('歡迎安裝 Medical PWA', {
+      body: '您可以隨時訪問我們的應用程式，即使離線也能使用！',
+      icon: '/img/icons/android-chrome-50x50.png',
+    }),
+
     // service worker 盡快的得到更新和獲取頁面的控制權
     self.skipWaiting(),
   );
