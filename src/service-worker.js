@@ -7,6 +7,16 @@ import { NetworkFirst } from 'workbox-strategies';
 /* eslint no-underscore-dangle: 0 */
 const manifest = self.__WB_MANIFEST;
 
+// 添加需要快取的檔案
+const cacheFiles = [
+  '/',
+  '/index.html',
+  '/css/app.[hash].css',
+  '/css/chunk-vendors.[hash].css',
+  '/js/app.[hash].js',
+  '/js/chunk-vendors.[hash].js',
+];
+
 // 設定相應緩存名字的前綴與後綴
 setCacheNameDetails({
   prefix: 'medical-pwa',
@@ -15,24 +25,9 @@ setCacheNameDetails({
 // service worker 盡快的得到更新和獲取頁面的控制權
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    // 在安裝階段請求通知權限
-    Notification.requestPermission().then((permission) => {
-      if (permission === 'granted') {
-        // 通知權限已授予，您可以顯示通知或進行其他相應的操作
-        self.registration.showNotification('通知權限已啟用', {
-          body: '您現在可以接收通知了！',
-          icon: '../public/img/icons/android-chrome-50x50.png',
-        }).then(() => {
-          console.log('通知成功顯示');
-        }).catch((error) => {
-          console.error('無法顯示通知', error);
-        });
-      }
-    }),
-
     // 預緩存靜態資源
     caches.open('my-cache').then((cache) => {
-      return cache.addAll(manifest.map((item) => item.url));
+      return cache.addAll(cacheFiles);
     }),
 
     // service worker 盡快的得到更新和獲取頁面的控制權
@@ -41,6 +36,15 @@ self.addEventListener('install', (event) => {
   // eslint-disable-next-line no-unused-vars
   // event.waitUntil(self.skipWaiting());
 });
+
+self.addEventListener('fetch',(event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    }),
+  );
+});
+
 self.addEventListener('activate', (event) => {
   // eslint-disable-next-line no-unused-vars
   event.waitUntil(self.clientsClaim());
