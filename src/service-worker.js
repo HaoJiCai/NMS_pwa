@@ -21,7 +21,11 @@ self.addEventListener('install', (event) => {
         // 通知權限已授予，您可以顯示通知或進行其他相應的操作
         self.registration.showNotification('通知權限已啟用', {
           body: '您現在可以接收通知了！',
-          icon: 'path/to/icon.png',
+          icon: '../public/img/icons/android-chrome-50x50.png',
+        }).then(() => {
+          console.log('通知成功顯示');
+        }).catch((error) => {
+          console.error('無法顯示通知', error);
         });
       }
     }),
