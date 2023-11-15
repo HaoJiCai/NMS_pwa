@@ -10,6 +10,17 @@ import store from './store';
 // createApp(App).use(store).use(router).mount('#app');
 const APP = createApp(App);
 
+if ('serviceWorker' in navigator) {
+  // 註冊 Service Worker
+  navigator.serviceWorker.register('/service-worker.js')
+    .then((registration) => {
+      console.log('Service Worker 注冊成功:', registration);
+    })
+    .catch((error) => {
+      console.error('Service Worker 注冊失敗:', error);
+    });
+}
+
 APP.use(VueAxios, axios);
 APP.use(bootstrapIcons);
 APP.use(store);

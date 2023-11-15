@@ -37,17 +37,17 @@ self.addEventListener('install', (event) => {
   // event.waitUntil(self.skipWaiting());
 });
 
+self.addEventListener('activate', (event) => {
+  // eslint-disable-next-line no-unused-vars
+  event.waitUntil(self.clientsClaim());
+});
+
 self.addEventListener('fetch',(event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
       return response || fetch(event.request);
     }),
   );
-});
-
-self.addEventListener('activate', (event) => {
-  // eslint-disable-next-line no-unused-vars
-  event.waitUntil(self.clientsClaim());
 });
 
 // 對我們請求的數據進行緩存，這裡採用 networkFirst 方式
