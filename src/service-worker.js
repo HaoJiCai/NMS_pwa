@@ -10,10 +10,6 @@ const manifest = self.__WB_MANIFEST;
 // 添加需要快取的檔案
 const cacheFiles = [
   '/NMS_pwa/index.html',
-  '/NMS_pwa/css/app.[hash].css',
-  '/NMS_pwa/css/chunk-vendors.[hash].css',
-  '/NMS_pwa/js/app.[hash].js',
-  '/NMS_pwa/js/chunk-vendors.[hash].js',
 ];
 
 // 設定相應緩存名字的前綴與後綴
