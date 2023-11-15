@@ -9,6 +9,7 @@ const manifest = self.__WB_MANIFEST;
 
 // 添加需要快取的檔案
 const cacheFiles = [
+  './',
   './index.html',
   './css/app.[hash].css',
   './css/chunk-vendors.[hash].css',
@@ -26,26 +27,11 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     // 預緩存靜態資源
     caches.open('my-cache').then((cache) => {
-      return Promise.all(
-        cacheFiles.map((url) => {
-          return fetch(url)
-            .then((response) => {
-              // 檢查響應是否成功
-              if (!response.ok) {
-                throw new Error(`Failed to fetch: ${url}`);
-              }
-              // 將成功的響應加入快取
-              return cache.put(url, response);
-            })
-            .catch((error) => {
-              console.error(`Caching failed for ${url}:`, error);
-            });
-        })
-      );
+      return cache.addAll(cacheFiles);
     }),
 
     // service worker 盡快的得到更新和獲取頁面的控制權
-    // self.skipWaiting(),
+    self.skipWaiting(),
   );
   // eslint-disable-next-line no-unused-vars
   // event.waitUntil(self.skipWaiting());
