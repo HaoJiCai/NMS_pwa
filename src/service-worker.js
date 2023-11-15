@@ -9,12 +9,11 @@ const manifest = self.__WB_MANIFEST;
 
 // 添加需要快取的檔案
 const cacheFiles = [
-  './',
-  './index.html',
-  './css/app.[hash].css',
-  './css/chunk-vendors.[hash].css',
-  './js/app.[hash].js',
-  './js/chunk-vendors.[hash].js',
+  '/index.html',
+  '/css/app.[hash].css',
+  '/css/chunk-vendors.[hash].css',
+  '/js/app.[hash].js',
+  '/js/chunk-vendors.[hash].js',
 ];
 
 // 設定相應緩存名字的前綴與後綴
