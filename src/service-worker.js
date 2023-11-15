@@ -27,6 +27,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     // 預緩存靜態資源
     caches.open('my-cache').then((cache) => {
+      console.log(cache.addAll(cacheFiles));
       return cache.addAll(cacheFiles);
     }),
 
@@ -45,6 +46,7 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch',(event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
+      console.log(response, fetch(event.request));
       return response || fetch(event.request);
     }),
   );
