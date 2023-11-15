@@ -12,7 +12,7 @@ const APP = createApp(App);
 
 if ('serviceWorker' in navigator) {
   // 註冊 Service Worker
-  navigator.serviceWorker.register('/service-worker.js')
+  navigator.serviceWorker.register('./NMS_pwa/service-worker.js')
     .then((registration) => {
       console.log('Service Worker 注冊成功:', registration);
     })
