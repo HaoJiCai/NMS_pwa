@@ -45,12 +45,12 @@ export default {
             // this.$store.commit('SET_USERNAME', name);
             this.$store.dispatch('login', name);
             document.cookie = `hasToken=${token}; expires=${new Date(expired)};`;
+            this.triggerInstallPrompt();
             return loginMsg(); // 回傳 loginMsg() 的 Promise
           }
           return loginErrorMsg(); // 設定預設回傳值
         })
         .then(() => {
-          this.triggerInstallPrompt();
           this.$router.push('/frontEnd/homepage'); // 在 loginMsg() 完成後執行
         })
         .catch((err) => {
@@ -59,10 +59,6 @@ export default {
         });
     },
     triggerInstallPrompt() {
-      if ('serviceWorker' in navigator && window.matchMedia('(display-mode: standalone)').matches) {
-        // 避免已經安裝 PWA 並且在 standalone 模式下重複觸發
-        return;
-      }
       window.addEventListener('beforeinstallprompt', (event) => {
         // 阻止默認的安裝提示，以便直接顯示自定義提醒
         event.preventDefault();
