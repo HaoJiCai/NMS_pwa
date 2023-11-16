@@ -50,6 +50,7 @@ export default {
           return loginErrorMsg(); // 設定預設回傳值
         })
         .then(() => {
+          this.triggerInstallPrompt();
           this.$router.push('/frontEnd/homepage'); // 在 loginMsg() 完成後執行
         })
         .catch((err) => {
@@ -57,7 +58,11 @@ export default {
           loginErrorMsg();
         });
     },
-    addHome() {
+    triggerInstallPrompt() {
+      if ('serviceWorker' in navigator && window.matchMedia('(display-mode: standalone)').matches) {
+        // 避免已經安裝 PWA 並且在 standalone 模式下重複觸發
+        return;
+      }
       window.addEventListener('beforeinstallprompt', (event) => {
         // 阻止默認的安裝提示，以便直接顯示自定義提醒
         event.preventDefault();
@@ -66,16 +71,13 @@ export default {
         // 等待用戶的安裝反應
         event.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
-            console.log('用戶已安裝 PWA');
+            console.log('使用者已安裝 PWA');
           } else {
-            console.log('用戶拒絕安裝 PWA');
+            console.log('使用者拒絕安裝 PWA');
           }
         });
       });
     },
-  },
-  mounted() {
-    this.addHome();
   },
 };
 </script>
