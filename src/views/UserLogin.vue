@@ -45,7 +45,6 @@ export default {
             // this.$store.commit('SET_USERNAME', name);
             this.$store.dispatch('login', name);
             document.cookie = `hasToken=${token}; expires=${new Date(expired)};`;
-            this.triggerInstallPrompt();
             return loginMsg(); // 回傳 loginMsg() 的 Promise
           }
           return loginErrorMsg(); // 設定預設回傳值
@@ -57,22 +56,6 @@ export default {
           console.log(err);
           loginErrorMsg();
         });
-    },
-    triggerInstallPrompt() {
-      window.addEventListener('beforeinstallprompt', (event) => {
-        // 阻止默認的安裝提示，以便直接顯示自定義提醒
-        event.preventDefault();
-        // 直接顯示安裝提示
-        event.prompt();
-        // 等待用戶的安裝反應
-        event.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('使用者已安裝 PWA');
-          } else {
-            console.log('使用者拒絕安裝 PWA');
-          }
-        });
-      });
     },
   },
 };
