@@ -57,43 +57,43 @@ export default {
           loginErrorMsg();
         });
     },
-    installPrompt() {
-      // 在全域範圍中註冊 beforeinstallprompt 事件監聽器
-      let deferredPrompt;
-      function showInstallButton() {
-        // 創建一個按鈕
-        const installButton = document.getElementById('signinBtn');
-        installButton.addEventListener('click', () => {
-          // 顯示安裝提示
-          if (deferredPrompt) {
-            deferredPrompt.prompt();
-            // 等待用戶的安裝反應
-            deferredPrompt.userChoice.then((choiceResult) => {
-              if (choiceResult.outcome === 'accepted') {
-                console.log('使用者已安裝 PWA');
-              } else {
-                console.log('使用者拒絕安裝 PWA');
-              }
-              // 清除 deferredPrompt
-              deferredPrompt = null;
-            });
-          }
-        });
-      }
+    // installPrompt() {
+    //   // 在全域範圍中註冊 beforeinstallprompt 事件監聽器
+    //   let deferredPrompt;
+    //   function showInstallButton() {
+    //     // 創建一個按鈕
+    //     const installButton = document.getElementById('signinBtn');
+    //     installButton.addEventListener('click', () => {
+    //       // 顯示安裝提示
+    //       if (deferredPrompt) {
+    //         deferredPrompt.prompt();
+    //         // 等待用戶的安裝反應
+    //         deferredPrompt.userChoice.then((choiceResult) => {
+    //           if (choiceResult.outcome === 'accepted') {
+    //             console.log('使用者已安裝 PWA');
+    //           } else {
+    //             console.log('使用者拒絕安裝 PWA');
+    //           }
+    //           // 清除 deferredPrompt
+    //           deferredPrompt = null;
+    //         });
+    //       }
+    //     });
+    //   }
 
-      window.addEventListener('beforeinstallprompt', (event) => {
-        // 阻止默認的安裝提示
-        event.preventDefault();
-        // 儲存事件對象以供稍後使用
-        deferredPrompt = event;
-        // 顯示安裝按鈕
-        showInstallButton();
-      });
-    },
+    //   window.addEventListener('beforeinstallprompt', (event) => {
+    //     // 阻止默認的安裝提示
+    //     event.preventDefault();
+    //     // 儲存事件對象以供稍後使用
+    //     deferredPrompt = event;
+    //     // 顯示安裝按鈕
+    //     showInstallButton();
+    //   });
+    // },
   },
-  created() {
-    this.installPrompt();
-  },
+  // mounted() {
+  //   this.installPrompt();
+  // },
 };
 </script>
 
