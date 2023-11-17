@@ -21,28 +21,40 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// 自定義安裝提示
-function showCustomInstallPrompt(event) {
-  // 在這裡你可以顯示自己的安裝提示 UI，或直接呼叫 event.prompt() 觸發瀏覽器的內建提示
-  event.prompt();
-  // 等待用戶的安裝反應
-  event.userChoice.then((choiceResult) => {
-    if (choiceResult.outcome === 'accepted') {
-      console.log('用戶已安裝 PWA');
-    } else {
-      console.log('用戶拒絕安裝 PWA');
+// 在全域範圍中註冊 beforeinstallprompt 事件監聽器
+let deferredPrompt;
+function showInstallButton() {
+  // 創建一個按鈕
+  const installButton = document.createElement('button');
+  installButton.textContent = '安裝 PWA';
+  installButton.addEventListener('click', () => {
+    // 顯示安裝提示
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      // 等待用戶的安裝反應
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('用戶已安裝 PWA');
+        } else {
+          console.log('用戶拒絕安裝 PWA');
+        }
+        // 清除 deferredPrompt
+        deferredPrompt = null;
+      });
     }
   });
+
+  // 將按鈕添加到 DOM 中
+  document.body.appendChild(installButton);
 }
 
-// 監聽 beforeinstallprompt 事件
 window.addEventListener('beforeinstallprompt', (event) => {
-  // 阻止預設行為，以便自定義安裝提示
+  // 阻止默認的安裝提示
   event.preventDefault();
-  console.log('觸發 beforeinstallprompt');
-  // 做一些你想要的操作，例如顯示自定義的安裝提示
-  showCustomInstallPrompt(event);
-  console.log('觸發 showCustomInstallPrompt');
+  // 儲存事件對象以供稍後使用
+  deferredPrompt = event;
+  // 顯示安裝按鈕
+  showInstallButton();
 });
 
 APP.use(VueAxios, axios);
