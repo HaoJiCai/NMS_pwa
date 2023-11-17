@@ -25,22 +25,26 @@ if ('serviceWorker' in navigator) {
 }
 
 function showInstall() {
-  setTimeout(() => {
-    // 顯示安裝提示
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      // 等待用戶的安裝反應
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('使用者已安裝 PWA');
-        } else {
-          console.log('使用者拒絕安裝 PWA');
-        }
-        // 清除 deferredPrompt
-        deferredPrompt = null;
-      });
-    }
-  }, 1000);
+  let timeSet;
+  document.addEventListener('click', () => {
+    timeSet = setTimeout(() => {
+      // 顯示安裝提示
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        // 等待用戶的安裝反應
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('使用者已安裝 PWA');
+          } else {
+            console.log('使用者拒絕安裝 PWA');
+          }
+          // 清除 deferredPrompt
+          deferredPrompt = null;
+        });
+      }
+    }, 3000);
+  });
+  clearTimeout(timeSet);
 }
 
 function requestNotificationPermission() {
