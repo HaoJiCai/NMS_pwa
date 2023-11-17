@@ -32,13 +32,14 @@ function requestNotificationPermission() {
           body: '您現在可以接收通知了！',
         });
         console.log(notification);
+        showInstall();
       }
     });
   }
 }
 
 function showInstall() {
-  document.addEventListener('click', () => {
+  setTimeout(() => {
     // 顯示安裝提示
     if (deferredPrompt) {
       deferredPrompt.prompt();
@@ -53,8 +54,7 @@ function showInstall() {
         deferredPrompt = null;
       });
     }
-    requestNotificationPermission();
-  });
+  }, 1000)
 }
 
 window.addEventListener('beforeinstallprompt', (event) => {
@@ -62,7 +62,7 @@ window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();
   // 儲存事件對象以供稍後使用
   deferredPrompt = event;
-  showInstall();
+  requestNotificationPermission();
 });
 
 APP.use(VueAxios, axios);
