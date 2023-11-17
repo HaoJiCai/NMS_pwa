@@ -12,6 +12,7 @@ const APP = createApp(App);
 
 // 在全域範圍中註冊 beforeinstallprompt 事件監聽器
 let deferredPrompt;
+let hasShownInstallPrompt = false;
 
 if ('serviceWorker' in navigator) {
   // 註冊 Service Worker
@@ -25,26 +26,25 @@ if ('serviceWorker' in navigator) {
 }
 
 function showInstall() {
-  let timeSet;
   document.addEventListener('click', () => {
-    timeSet = setTimeout(() => {
+    // 檢查是否已經顯示過通知
+    if (!hasShownInstallPrompt && deferredPrompt) {
+      // 設定已經顯示通知的標誌
+      hasShownInstallPrompt = true;
       // 顯示安裝提示
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        // 等待用戶的安裝反應
-        deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('使用者已安裝 PWA');
-          } else {
-            console.log('使用者拒絕安裝 PWA');
-          }
-          // 清除 deferredPrompt
-          deferredPrompt = null;
-        });
-      }
-    }, 3000);
+      deferredPrompt.prompt();
+      // 等待用戶的安裝反應
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('使用者已安裝 PWA');
+        } else {
+          console.log('使用者拒絕安裝 PWA');
+        }
+        // 清除 deferredPrompt
+        deferredPrompt = null;
+      });
+    }
   });
-  clearTimeout(timeSet);
 }
 
 function requestNotificationPermission() {
