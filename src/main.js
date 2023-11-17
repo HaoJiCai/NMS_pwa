@@ -24,20 +24,6 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-function requestNotificationPermission() {
-  if ('Notification' in window) {
-    Notification.requestPermission().then((permission) => {
-      if (permission === 'granted') {
-        const notification = new Notification('通知權限已啟用', {
-          body: '您現在可以接收通知了！',
-        });
-        console.log(notification);
-        showInstall();
-      }
-    });
-  }
-}
-
 function showInstall() {
   setTimeout(() => {
     // 顯示安裝提示
@@ -54,7 +40,21 @@ function showInstall() {
         deferredPrompt = null;
       });
     }
-  }, 1000)
+  }, 1000);
+}
+
+function requestNotificationPermission() {
+  if ('Notification' in window) {
+    Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        const notification = new Notification('通知權限已啟用', {
+          body: '您現在可以接收通知了！',
+        });
+        console.log(notification);
+        showInstall();
+      }
+    });
+  }
 }
 
 window.addEventListener('beforeinstallprompt', (event) => {
