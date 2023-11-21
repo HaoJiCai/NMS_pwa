@@ -7,6 +7,8 @@
         <option :value="patient.patient_id" v-for="patient in patients" :key="patient.patient_id">{{ patient.name }}</option>
       </select>
     </div>
+    <!----- 畫面 Loading ----->
+    <loading :active="isLoading"></loading>
     <div class="chartBlock">
       <div class="bar-chart chart">
         <Bar
@@ -27,6 +29,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import Loading from 'vue-loading-overlay';
 import { Line, Bar } from 'vue-chartjs';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, PointElement, LineElement } from 'chart.js';
 
@@ -92,6 +96,7 @@ export default {
       obj.labels = [];
       obj.datasets[0].data = [];
       if (this.selectedPatientID !== '') {
+        this.$store.dispatch('startLoading');
         const api = `${this.fixApi}/patient/healthConditions/${this.selectedPatientID}`;
         console.log(api);
         this.$http.get(api).then((res) => {
@@ -103,6 +108,7 @@ export default {
           // 加入資料到 weightBarData
           this.weightBarData = obj;
           // console.log(obj);
+          this.$store.dispatch('stopLoading');
         }).catch((err) => {
           console.log(err);
         });
@@ -126,6 +132,7 @@ export default {
       obj.labels = [];
       obj.datasets[0].data = [];
       if (this.selectedPatientID !== '') {
+        this.$store.dispatch('startLoading');
         const api = `${this.fixApi}/patient/healthConditions/${this.selectedPatientID}`;
         console.log(api);
         this.$http.get(api).then((res) => {
@@ -137,6 +144,7 @@ export default {
           // 加入資料到 weightBarData
           this.bmiLineData = obj;
           // console.log(obj);
+          this.$store.dispatch('stopLoading');
         }).catch((err) => {
           console.log(err);
         });
@@ -154,6 +162,9 @@ export default {
       return `${year}-${month}-${day}`;
     },
   },
+  computed: {
+    ...mapGetters(['isLoading']), // 导入isLoading状态
+  },
   watch: {
     selectedPatientID: {
       handler() {
@@ -167,6 +178,7 @@ export default {
   components: {
     Line,
     Bar,
+    Loading,
   },
   created() {
     this.getPatients();

@@ -94,9 +94,7 @@ export default {
       this.$http.put(api, this.infoDetail).then((res) => {
         this.$emit('editPes');
         console.log(res.data);
-        setTimeout(() => {
-          this.$store.dispatch('stopLoading');
-        }, 350);
+        this.$store.dispatch('stopLoading');
         customizeSuccessMsg(res.data.msg);
       }).catch((err) => {
         console.log(err);

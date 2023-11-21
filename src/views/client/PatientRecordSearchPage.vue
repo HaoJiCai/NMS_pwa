@@ -32,6 +32,8 @@
         </tbody>
       </table>
     </div>
+    <!----- 畫面 Loading ----->
+    <loading :active="isLoading"></loading>
   </div>
   <PatientInfoDetailsModal :patientinfo-detail="healthConditions"></PatientInfoDetailsModal>
 </template>
@@ -40,6 +42,8 @@
 /* eslint object-curly-newline: "off" */
 import * as bootstrap from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import Loading from 'vue-loading-overlay';
+import { mapGetters } from 'vuex';
 import { searchNoKeyword, searchDataNum } from '../toastMessage';
 import PatientInfoDetailsModal from '../../components/PatientInfoDetailsModal.vue';
 
@@ -57,6 +61,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['isLoading']), // 导入isLoading状态
     genderText() {
       return {
         0: '女',
@@ -66,6 +71,7 @@ export default {
   },
   methods: {
     searchKeyword() {
+      this.$store.dispatch('startLoading');
       const api = `${this.fixApi}/patient`;
       const keyword = this.searchKeyWords.trim();
 
@@ -79,22 +85,26 @@ export default {
         }
         // this.filterUserInfo();
         this.searchKeyWords = '';
+        this.$store.dispatch('stopLoading');
       }).catch((err) => {
         console.log(err);
       });
     },
     search() {
+      this.$store.dispatch('startLoading');
       const api = `${this.fixApi}/patient`;
 
       this.$http.get(api).then((res) => {
         // console.log(res.data);
         this.patients = res.data[0].result;
         this.searchKeyWords = '';
+        this.$store.dispatch('stopLoading');
       }).catch((err) => {
         console.log(err);
       });
     },
     showDetails(patientID) {
+      this.$store.dispatch('startLoading');
       const api = `${this.fixApi}/patient/healthConditions/${patientID}`;
       this.$http.get(api).then((res) => {
         this.healthConditions = res.data;
@@ -103,6 +113,7 @@ export default {
         this.healthConditions.modalTitle = `${this.healthConditions[0].name} 詳細資料`;
         // 顯示 Modal 彈跳視窗
         this.patientInfoDetails_modal.show();
+        this.$store.dispatch('stopLoading');
       }).catch((err) => {
         console.log(err);
         this.healthConditions.modalTitle = '錯誤';
@@ -113,6 +124,7 @@ export default {
   },
   components: {
     PatientInfoDetailsModal,
+    Loading,
   },
   created() {
     this.search();

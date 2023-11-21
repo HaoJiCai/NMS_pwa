@@ -89,9 +89,7 @@ export default {
       this.$http.post(api, this.infoDetail).then((res) => {
         this.$emit('addPes');
         console.log(res.data);
-        setTimeout(() => {
-          this.$store.dispatch('stopLoading');
-        }, 350);
+        this.$store.dispatch('stopLoading');
         customizeSuccessMsg(res.data.msg);
       }).catch((err) => {
         console.log(err);

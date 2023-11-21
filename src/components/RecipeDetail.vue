@@ -55,10 +55,12 @@ export default {
   },
   methods: {
     getRecipeCategory() {
+      this.$store.dispatch('startLoading');
       const api = `${this.fixApi}/recipe/${this.localCategoryID}`;
       this.$http.get(api).then((res) => {
         this.recipelist.list = res.data;
         this.countCalories(this.recipelist.list);
+        this.$store.dispatch('stopLoading');
       });
     },
     countCalories(listData) {

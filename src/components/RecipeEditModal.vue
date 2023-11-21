@@ -134,16 +134,12 @@ export default {
       const api = `${this.fixApi}/recipe/${this.infoDetail.category_id}/${this.infoDetail.recipe_id}`;
       if (this.infoDetailCopy.name === '' || this.infoDetailCopy.nutrition.length === 0 || this.infoDetailCopy.step === '') {
         customizeErrorMsg('尚有輸入欄位未填寫');
-        setTimeout(() => {
-          this.$store.dispatch('stopLoading');
-        }, 350);
+        this.$store.dispatch('stopLoading');
       } else {
         this.$http.put(api, this.infoDetailCopy).then((res) => {
           this.$emit('editRecipe');
           console.log(res.data);
-          setTimeout(() => {
-            this.$store.dispatch('stopLoading');
-          }, 350);
+          this.$store.dispatch('stopLoading');
           customizeSuccessMsg(res.data.msg);
         }).catch((err) => {
           console.log(err);

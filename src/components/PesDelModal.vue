@@ -37,9 +37,7 @@ export default {
       this.$http.delete(api).then((res) => {
         this.$emit('deletePes');
         console.log(res.data);
-        setTimeout(() => {
-          this.$store.dispatch('stopLoading');
-        }, 350);
+        this.$store.dispatch('stopLoading');
         customizeSuccessMsg(res.data.msg);
       }).catch((err) => {
         console.log(err);

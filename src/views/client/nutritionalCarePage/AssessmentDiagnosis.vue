@@ -76,6 +76,7 @@ export default {
   },
   methods: {
     getSearch() {
+      this.$store.dispatch('startLoading');
       const api = `${this.fixApi}/nutritionist/nutritionalAssessmentDiagnosis/${this.nutritionist_id}`;
       const keyword = this.searchKeyWords.trim();
       this.$http.get(api, { params: { keyword } }).then((res) => {
@@ -86,15 +87,18 @@ export default {
           searchDataNum(res.data[0].total);
         }
         this.searchKeyWords = '';
+        this.$store.dispatch('stopLoading');
       }).catch((err) => {
         console.log(err);
       });
     },
     getAssessmentDiagnosis() {
+      this.$store.dispatch('startLoading');
       const api = `${this.fixApi}/nutritionist/nutritionalAssessmentDiagnosis/${this.nutritionist_id}`;
       this.$http.get(api).then((res) => {
         this.PES_arr = res.data[0].result;
         this.searchKeyWords = '';
+        this.$store.dispatch('stopLoading');
       }).catch((err) => {
         console.log(err);
       });
@@ -180,8 +184,8 @@ export default {
     Loading,
   },
   created() {
-    this.getAssessmentDiagnosis();
     this.savedLocalUserID();
+    this.getAssessmentDiagnosis();
   },
   mounted() {
     this.pesModal = new bootstrap.Modal(document.getElementById('pesModal'));
