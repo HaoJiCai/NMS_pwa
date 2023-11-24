@@ -36,7 +36,6 @@
             <button type="button" class="register" @click="register">註冊</button>
             <button type="button" class="backStep" @click="backStep">返回</button>
           </div>
-          
         </v-form>
       </div>
     </div>
@@ -80,22 +79,39 @@ export default {
     register() {
       const baseURL = 'https://140.123.173.4';
       const registerAPI = '/nutritionist/register';
-      this.$http.post(`${baseURL}${registerAPI}`, this.registerInfo)
-        .then((res) => {
-          console.log(res.data);
-          if (res.data && res.data.success) {
-            return customizeSuccessMsg(res.data.msg); // 回傳 loginMsg() 的 Promise
-          }
-          return customizeErrorMsg(res.data ? res.data.msg : '註冊失敗，請稍後再試'); // 設定預設回傳值
-        })
-        .then(() => {
-          this.$router.push('/userLogin');
-        })
-        .catch((err) => {
-          console.log(err);
-          customizeErrorMsg('此帳號已被註冊！！');
-        });
-      this.clearInput();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // email正規表達式
+      const phoneRegex = /^09\d{8}$/; // 手機正規表達式
+      const chineseRegex = /[\u4e00-\u9fa5]/; // 中文正規表達式
+      if (this.registerInfo.name === '' || this.registerInfo.account === '' || this.registerInfo.password === '' || this.registerInfo.email === '' || this.registerInfo.phone === '') {
+        customizeErrorMsg('請填寫完整資訊');
+      } else if (!emailRegex.test(this.registerInfo.email)) {
+        customizeErrorMsg('請確認電子信箱格式');
+      } else if (!phoneRegex.test(this.registerInfo.phone)) {
+        customizeErrorMsg('請確認手機號碼格式');
+      } else if (this.registerInfo.name.length > 10) {
+        customizeErrorMsg('姓名不能超過10個字元');
+      } else if (this.registerInfo.account > 16 || this.registerInfo.password > 16) {
+        customizeErrorMsg('帳號與密碼不能超過16個字元');
+      } else if (chineseRegex.test(this.registerInfo.account) || chineseRegex.test(this.registerInfo.password)) {
+        customizeErrorMsg('帳號與密碼不能包含中文');
+      } else {
+        this.$http.post(`${baseURL}${registerAPI}`, this.registerInfo)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data && res.data.success) {
+              return customizeSuccessMsg(res.data.msg); // 回傳 loginMsg() 的 Promise
+            }
+            return customizeErrorMsg(res.data ? res.data.msg : '註冊失敗，請稍後再試'); // 設定預設回傳值
+          })
+          .then(() => {
+            this.$router.push('/userLogin');
+          })
+          .catch((err) => {
+            console.log(err);
+            customizeErrorMsg('此帳號已被註冊！！');
+          });
+        this.clearInput();
+      }
     },
     backStep() {
       this.$router.push('/userLogin'); // 返回登入畫面
