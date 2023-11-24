@@ -1,6 +1,6 @@
 <!--eslint-disable -->
 <template>
-  <div class="wrapper">
+  <div class="wrapper-register">
     <div class="container-register">
       <div class="title">
         <h2>營養師註冊</h2>
@@ -120,9 +120,10 @@ export default {
 
 <style lang="scss">
   // 設定電腦版（預設）
-  .wrapper {
+  .wrapper-register {
     margin: 0 auto;
-    background-color: #353535;
+    background: url("../assets/login_background.jpg") no-repeat center/100%;
+    background-size: cover;
     height: 100vh; /* 將高度設置為視窗高度 */
     display: flex;
     justify-content: center;
@@ -210,7 +211,7 @@ export default {
 
   // 設定平板版
   @media screen and (max-width: 1024px) {
-    .wrapper {
+    .wrapper-register {
       .container-register {
         padding: 30px 120px;
         .title {
@@ -261,7 +262,7 @@ export default {
 
   // 設定手機板
   @media screen and (max-width: 768px) {
-    .wrapper {
+    .wrapper-register {
       .container-register {
         padding: 20px 50px;
         .title {

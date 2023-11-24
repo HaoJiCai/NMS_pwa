@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper">
-    <div class="container_login">
+  <div class="wrapper-login">
+    <div class="container-login">
       <div class="loginBlock">
         <h1>營養師登入</h1>
         <form class="loginInputBlock">
@@ -67,11 +67,11 @@ export default {
 
 <style lang="scss">
   // 設定電腦版（預設）
-  .wrapper {
+  .wrapper-login {
     background: url("../assets/login_background.jpg") no-repeat center/100%;
     background-size: cover;
     height: 100vh; /* 將高度設置為視窗高度 */
-    .container_login {
+    .container-login {
       display: flex; /* 設置為 Flex 容器 */
       justify-content: center; /* 將內容水平置中 */
       align-items: center; /* 將內容垂直置中 */
@@ -138,11 +138,11 @@ export default {
   }
   // 設定平板版
   @media screen and (max-width: 1024px) {
-    .wrapper {
+    .wrapper-login {
       background: url("../assets/login_background.jpg") no-repeat center/100%;
       background-size: cover;
       height: 100vh; /* 將高度設置為視窗高度 */
-      .container_login {
+      .container-login {
         display: flex; /* 設置為 Flex 容器 */
         justify-content: center; /* 將內容水平置中 */
         align-items: center; /* 將內容垂直置中 */
@@ -210,11 +210,11 @@ export default {
   }
   // 設定手機板
   @media screen and (max-width: 768px) {
-    .wrapper {
+    .wrapper-login {
       background: url("../assets/login_background.jpg") no-repeat center/100%;
       background-size: cover;
       height: 100vh; /* 將高度設置為視窗高度 */
-      .container_login {
+      .container-login {
         display: flex; /* 設置為 Flex 容器 */
         justify-content: center; /* 將內容水平置中 */
         align-items: center; /* 將內容垂直置中 */
