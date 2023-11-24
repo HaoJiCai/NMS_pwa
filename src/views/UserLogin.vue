@@ -13,6 +13,7 @@
             placeholder="Password" requried autocomplete="off">
           </label>
           <button type="button" id="signinBtn" class="signinBtn" @click="login">登入</button>
+          <button type="button" id="registerBtn" class="registerBtn" @click="goToRegister">註冊</button>
         </form>
       </div>
     </div>
@@ -56,6 +57,9 @@ export default {
           console.log(err);
           loginErrorMsg();
         });
+    },
+    goToRegister() {
+      this.$router.push('/userRegister');
     },
   },
 };
@@ -110,6 +114,22 @@ export default {
           .signinBtn:hover {
             font-size: 1.25rem;
             background-color: rgb(36, 39, 122);
+            transition-duration: 0.25s;
+          }
+          .registerBtn {
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 2.5;
+            color: whitesmoke;
+            background-color: rgb(156, 61, 50);
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            cursor: pointer;
+          }
+          .registerBtn:hover {
+            font-size: 1.25rem;
+            background-color: rgb(122, 72, 36);
             transition-duration: 0.25s;
           }
         }
@@ -167,6 +187,22 @@ export default {
               background-color: rgb(36, 39, 122);
               transition-duration: 0.25s;
             }
+            .registerBtn {
+              width: 100%;
+              font-size: 1rem;
+              font-weight: 400;
+              line-height: 2.5;
+              color: whitesmoke;
+              background-color: rgb(156, 61, 50);
+              border: 1px solid #ced4da;
+              border-radius: 0.25rem;
+              cursor: pointer;
+            }
+            .registerBtn:hover {
+              font-size: 1.25rem;
+              background-color: rgb(122, 72, 36);
+              transition-duration: 0.25s;
+            }
           }
         }
       }
@@ -221,6 +257,22 @@ export default {
             .signinBtn:hover {
               font-size: 1.1rem;
               background-color: rgb(36, 39, 122);
+              transition-duration: 0.25s;
+            }
+            .registerBtn {
+              width: 100%;
+              font-size: 1rem;
+              font-weight: 400;
+              line-height: 2.5;
+              color: whitesmoke;
+              background-color: rgb(156, 61, 50);
+              border: 1px solid #ced4da;
+              border-radius: 0.75rem;
+              cursor: pointer;
+            }
+            .registerBtn:hover {
+              font-size: 1.1rem;
+              background-color: rgb(122, 72, 36);
               transition-duration: 0.25s;
             }
           }
