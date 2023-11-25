@@ -210,6 +210,9 @@ export default {
           width: 100%;
           margin-bottom: 8px;
         }
+        .invalid-feedback {
+          text-align: center;
+        }
       }
       .nutrition-label {
         width: 50%;
