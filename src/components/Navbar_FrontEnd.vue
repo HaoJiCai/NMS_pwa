@@ -56,6 +56,7 @@
                 <span>{{ isLoggedIn ? username : '登入' }}</span>
               </button>
               <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="userDropdown" style="min-width: 30px;">
+                <li><button @click="goToUserInfo" class="dropdown-item userInfoBtn" type="button">個人資料</button></li>
                 <li><button @click="logout" class="dropdown-item logoutBtn" type="button">登出</button></li>
               </ul>
             </div>
@@ -77,6 +78,9 @@ export default {
     };
   },
   methods: {
+    goToUserInfo() {
+      this.$router.push('/userInfo');
+    },
     logout() {
       // 清除使用者資訊並導向登入頁面
       // this.$store.commit('CLEAR_USERNAME');
@@ -289,7 +293,7 @@ export default {
               flex-direction: column;
               justify-content: center;
               align-items: center;
-              .logoutBtn {
+              .userInfoBtn, .logoutBtn {
                 font-size: 16px;
                 @media screen and (max-width: 768px) {
                   font-size: 12px;
