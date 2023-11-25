@@ -39,7 +39,7 @@
           </ul>
           <ul class="navbar-nav loginBar">
             <div class="dropdown btn-group">
-              <button type="button" v-if="isLoggedIn" id="userDropdown" class="btn dropdown-toggle text-light" data-bs-toggle="dropdown" aria-expanded="false">
+              <button v-if="isLoggedIn" type="button" id="userDropdown" class="btn dropdown-toggle text-light" data-bs-toggle="dropdown" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                   <!-- 覆蓋 eslint 設置，僅能用在下一行 -->
                   <!-- eslint-disable-next-line max-len -->
@@ -47,7 +47,7 @@
                 </svg>
                 <span>{{ isLoggedIn ? username : '登入' }}</span>
               </button>
-              <button v-else class="nav-link text-light" @click="goToUserlogin">
+              <button v-else type="button" class="nav-link text-light" @click="goToUserlogin">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                   <!-- 覆蓋 eslint 設置，僅能用在下一行 -->
                   <!-- eslint-disable-next-line max-len -->
