@@ -68,6 +68,9 @@
 </template>
 
 <script>
+/* eslint object-curly-newline: "off" */
+import * as bootstrap from 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -124,6 +127,7 @@ export default {
   },
   created() {
     this.savedLocalUsername();
+    console.log(bootstrap);
   },
 };
 </script>
