@@ -110,20 +110,10 @@ export default {
             console.log(err);
             customizeErrorMsg('此帳號已被註冊！！');
           });
-        this.clearInput();
       }
     },
     backStep() {
       this.$router.push('/userLogin'); // 返回登入畫面
-    },
-    clearInput() {
-      this.registerInfo = {
-        name: '',
-        account: '',
-        password: '',
-        email: '',
-        phone: '',
-      };
     },
   },
   components: {
