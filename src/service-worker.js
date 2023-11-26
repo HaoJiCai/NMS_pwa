@@ -37,12 +37,31 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(self.clientsClaim());
 });
 
-self.addEventListener('fetch',(event) => {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
-      console.log(response, fetch(event.request));
-      return response || fetch(event.request);
-    }),
+      // 如果有緩存，直接返回緩存
+      if (response) {
+        return response;
+      }
+
+      // 如果沒有緩存，使用新的 Request 對象進行 fetch
+      return fetch(new Request(event.request))
+        .then((fetchResponse) => {
+          // 確保 fetch 成功後，將 response 複製一份放入緩存
+          if (fetchResponse && fetchResponse.status === 200) {
+            const responseToCache = fetchResponse.clone();
+            caches.open('my-cache').then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+          }
+
+          return fetchResponse;
+        })
+        .catch((error) => {
+          console.error('Fetch錯誤：', error.message);
+        });
+    })
   );
 });
 

@@ -97,7 +97,7 @@ export default {
       } else {
         this.$http.post(`${baseURL}${registerAPI}`, this.registerInfo)
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data && res.data.success) {
               return customizeSuccessMsg(res.data.msg); // 回傳 loginMsg() 的 Promise
             }
