@@ -69,6 +69,7 @@ export default {
   },
   mounted() {
     this.checkedLoginStatus();
+    this.requestNotificationPermission();
   },
 };
 </script>
