@@ -33,22 +33,30 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  // eslint-disable-next-line no-unused-vars
-  event.waitUntil(self.clientsClaim());
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName.startsWith('my-cache') && cacheName !== 'my-cache-v1.0.0') {
+            return caches.delete(cacheName);
+          }
+          return null;
+        })
+      );
+    })
+  );
+  self.clientsClaim();
 });
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
-      // 如果有緩存，直接返回緩存
       if (response) {
         return response;
       }
 
-      // 如果沒有緩存，使用新的 Request 對象進行 fetch
       return fetch(event.request)
         .then((fetchResponse) => {
-          // 確保 fetch 成功後，將 response 複製一份放入緩存
           if (fetchResponse && fetchResponse.status === 200) {
             const responseToCache = fetchResponse.clone();
             caches.open('my-cache').then((cache) => {
