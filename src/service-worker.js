@@ -50,26 +50,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      if (response) {
-        return response;
-      }
-
-      return fetch(event.request)
-        .then((fetchResponse) => {
-          if (fetchResponse && fetchResponse.status === 200 && event.request.method === 'GET') {
-            const responseToCache = fetchResponse.clone();
-            caches.open('my-cache').then((cache) => {
-              cache.put(event.request, responseToCache);
-            });
-          }
-
-          return fetchResponse;
-        })
-        .catch((error) => {
-          console.error('fetch錯誤：', error.message);
-        });
-    })
+    fetch(event.request).catch(() => caches.match(event.request))
   );
 });
 
