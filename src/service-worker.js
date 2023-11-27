@@ -2,7 +2,7 @@
 import { precacheAndRoute } from 'workbox-precaching';
 import { setCacheNameDetails } from 'workbox-core';
 import { registerRoute } from 'workbox-routing';
-import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
+import { StaleWhileRevalidate } from 'workbox-strategies';
 
 /* eslint no-underscore-dangle: 0 */
 const manifest = self.__WB_MANIFEST;
