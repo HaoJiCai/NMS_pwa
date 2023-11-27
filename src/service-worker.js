@@ -2,7 +2,7 @@
 import { precacheAndRoute } from 'workbox-precaching';
 import { setCacheNameDetails } from 'workbox-core';
 import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import { NetworkFirst } from 'workbox-strategies';
 
 /* eslint no-underscore-dangle: 0 */
 const manifest = self.__WB_MANIFEST;
@@ -67,7 +67,7 @@ self.addEventListener('fetch', (event) => {
           return fetchResponse;
         })
         .catch((error) => {
-          console.error('Fetch錯誤：', error.message);
+          console.error('fetch錯誤：', error.message);
         });
     })
   );
@@ -76,15 +76,15 @@ self.addEventListener('fetch', (event) => {
 // 對我們請求的數據進行緩存，這裡採用 networkFirst 方式
 registerRoute(
   /.*experiments\?.*/,
-  new StaleWhileRevalidate(),
+  new NetworkFirst(),
 );
 registerRoute(
   /.*experiments\/\d/,
-  new StaleWhileRevalidate(),
+  new NetworkFirst(),
 );
 registerRoute(
   /.*experiment_types.*/,
-  new StaleWhileRevalidate(),
+  new NetworkFirst(),
 );
 
 // 預緩存靜態資源
