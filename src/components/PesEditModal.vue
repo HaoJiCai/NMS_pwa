@@ -91,15 +91,27 @@ export default {
     confirmEdit() {
       this.$store.dispatch('startLoading');
       const api = `${this.fixApi}/nutritionist/nutritionalAssessmentDiagnosis/${this.nutritionist_id}/${this.infoDetail.diagnosis_no}`;
-      this.$http.put(api, this.infoDetail).then((res) => {
-        this.$emit('editPes');
-        console.log(res.data);
+      if (this.infoDetail.patient_id === '' || this.infoDetail.patient_id === undefined
+       || this.infoDetail.name === '' || this.infoDetail.name === undefined
+       || this.infoDetail.problem === '' || this.infoDetail.problem === undefined
+       || this.infoDetail.etiology === '' || this.infoDetail.etiology === undefined
+       || this.infoDetail.symptoms === '' || this.infoDetail.symptoms === undefined) {
+        customizeErrorMsg('尚有輸入欄位未填寫');
         this.$store.dispatch('stopLoading');
-        customizeSuccessMsg(res.data.msg);
-      }).catch((err) => {
-        console.log(err);
-        customizeErrorMsg(err.response.data.msg);
-      });
+      } else if (this.infoDetail.patient_id < 1) {
+        customizeErrorMsg('病患編號不能小於1');
+        this.$store.dispatch('stopLoading');
+      } else {
+        this.$http.put(api, this.infoDetail).then((res) => {
+          this.$emit('editPes');
+          console.log(res.data);
+          this.$store.dispatch('stopLoading');
+          customizeSuccessMsg(res.data.msg);
+        }).catch((err) => {
+          console.log(err);
+          customizeErrorMsg(err.response.data.msg);
+        });
+      }
     },
   },
   computed: {
