@@ -10,7 +10,7 @@
           </label>
           <label for="passwordInput">
             <input type="password" id="passwordInput" v-model="nutritionist.password"
-            placeholder="Password" requried autocomplete="off">
+            placeholder="Password" requried autocomplete="current-password">
           </label>
           <button type="button" id="signinBtn" class="signinBtn" @click="login">登入</button>
           <button type="button" id="registerBtn" class="registerBtn" @click="goToRegister">註冊</button>
