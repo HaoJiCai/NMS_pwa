@@ -47,26 +47,12 @@ function showInstall() {
   });
 }
 
-function requestNotificationPermission() {
-  if ('Notification' in window) {
-    Notification.requestPermission().then((permission) => {
-      if (permission === 'granted') {
-        const notification = new Notification('通知權限已啟用', {
-          body: '您現在可以接收通知了！',
-        });
-        console.log(notification);
-        showInstall();
-      }
-    });
-  }
-}
-
 window.addEventListener('beforeinstallprompt', (event) => {
   // 阻止默認的安裝提示
   event.preventDefault();
   // 儲存事件對象以供稍後使用
   deferredPrompt = event;
-  requestNotificationPermission();
+  showInstall();
 });
 
 APP.use(VueAxios, axios);

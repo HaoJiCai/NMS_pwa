@@ -87,6 +87,7 @@ export default {
     logout() {
       // 清除使用者資訊並導向登入頁面
       // this.$store.commit('CLEAR_USERNAME');
+      localStorage.removeItem('notificationPermissionFlag');
       this.$store.dispatch('logout'); // 使用 actions 呼叫 mutation
       this.$router.push('/userLogin');
     },

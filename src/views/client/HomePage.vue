@@ -38,6 +38,27 @@ export default {
         this.$router.push('/userLogin');
       });
     },
+    // 允許通知權限
+    requestNotificationPermission() {
+      if ('Notification' in window) {
+        // 檢查是否已經提示過權限
+        const notificationPermissionFlag = localStorage.getItem('notificationPermissionFlag');
+
+        if (!notificationPermissionFlag) {
+          Notification.requestPermission().then((permission) => {
+            if (permission === 'granted') {
+              const notification = new Notification('通知權限已啟用', {
+                body: '您現在可以接收通知了！',
+              });
+              console.log(notification);
+
+              // 將標誌設置為已提示過權限
+              localStorage.setItem('notificationPermissionFlag', true);
+            }
+          });
+        }
+      }
+    },
   },
   computed: {
     ...mapGetters(['getUserID', 'getUsername']), // 映射 Vuex getter
