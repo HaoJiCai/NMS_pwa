@@ -6,7 +6,7 @@
         <form class="loginInputBlock">
           <label for="accountInput">
             <input type="text" id="accountInput" v-model="nutritionist.account"
-            placeholder="Email Address" requried>
+            placeholder="Account" requried>
           </label>
           <label for="passwordInput">
             <input type="password" id="passwordInput" v-model="nutritionist.password"

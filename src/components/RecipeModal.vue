@@ -122,7 +122,9 @@ export default {
     confirmPost() {
       this.$store.dispatch('startLoading');
       const api = `${this.fixApi}/recipe/${this.categoryData}`;
-      if (this.infoDetailCopy.name === '' || this.infoDetailCopy.nutrition.length === 0 || this.infoDetailCopy.step === '') {
+      if (this.infoDetailCopy.name === '' || this.infoDetailCopy.name === undefined
+       || this.infoDetailCopy.nutrition.length === 0
+       || this.infoDetailCopy.step === '' || this.infoDetailCopy.step === undefined) {
         customizeErrorMsg('尚有輸入欄位未填寫');
         this.$store.dispatch('stopLoading');
       } else {
