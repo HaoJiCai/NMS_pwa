@@ -2,7 +2,7 @@
 import { precacheAndRoute } from 'workbox-precaching';
 import { setCacheNameDetails } from 'workbox-core';
 import { registerRoute } from 'workbox-routing';
-import { NetworkFirst } from 'workbox-strategies';
+import { StaleWhileRevalidate } from 'workbox-strategies';
 
 /* eslint no-underscore-dangle: 0 */
 const manifest = self.__WB_MANIFEST;
@@ -76,15 +76,15 @@ self.addEventListener('fetch', (event) => {
 // 對我們請求的數據進行緩存，這裡採用 networkFirst 方式
 registerRoute(
   /.*experiments\?.*/,
-  new NetworkFirst(),
+  new StaleWhileRevalidate(),
 );
 registerRoute(
   /.*experiments\/\d/,
-  new NetworkFirst(),
+  new StaleWhileRevalidate(),
 );
 registerRoute(
   /.*experiment_types.*/,
-  new NetworkFirst(),
+  new StaleWhileRevalidate(),
 );
 
 // 預緩存靜態資源
