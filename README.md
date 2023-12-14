@@ -1,4 +1,4 @@
-# vue3_pwa
+# NMS營養管理系統（PWA）
 
 ## Project setup
 ```
