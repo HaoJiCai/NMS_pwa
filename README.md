@@ -1,5 +1,7 @@
 # NMS營養管理系統（PWA）
 
+Demo 網址：https://haojicai.github.io/NMS_pwa/#/frontEnd/homePage
+
 ## Project setup
 ```
 npm install
